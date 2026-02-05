@@ -4,8 +4,8 @@ import { FavoriteOffersState } from './favorite-offers.state';
 import { CityState } from './city.state';
 
 export interface AppState {
-  favoriteOffers: FavoriteOffersState;
+/*  favoriteOffers: FavoriteOffersState;
   user: UserState;
+  city: CityState;*/
   offers: OffersState;
-  city: CityState;
 }
