@@ -1,8 +1,8 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Offer, OfferPreview} from '../core/models/offers';
+import {Offer, OfferPreview} from '../models/offers';
 import {Observable} from 'rxjs';
-import {APIRoute, BASE_URL} from '../core/constants/const';
+import {APIRoute, BASE_URL} from '../constants/const';
 
 @Injectable({
   providedIn: 'root',

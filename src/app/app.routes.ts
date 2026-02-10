@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AppRoute } from './core/constants/const';
+import {AuthGuard} from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -16,6 +17,7 @@ export const routes: Routes = [
   },
   {
     path: AppRoute.FAVORITES,
+    canActivate: [AuthGuard],
     title: 'Favorites',
     loadComponent: () =>
       import('./pages/favorites/favorites.component').then(

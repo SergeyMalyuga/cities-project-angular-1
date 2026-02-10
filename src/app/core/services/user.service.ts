@@ -1,9 +1,9 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {User} from '../core/models/user';
-import {APIRoute, BASE_URL} from '../core/constants/const';
-import {Credentials} from '../core/models/credentials';
+import {User} from '../models/user';
+import {APIRoute, BASE_URL} from '../constants/const';
+import {Credentials} from '../models/credentials';
 
 @Injectable({
   providedIn: 'root',
