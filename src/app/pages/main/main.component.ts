@@ -6,10 +6,11 @@ import {OfferPreview} from '../../core/models/offers';
 import {selectOffers} from '../../store/app/selector/app.selector';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {OfferCardComponent} from '../../shared/offer-card/offer-card.component';
+import {LocationsListComponent} from '../../features/locations-list/locations-list.component';
 
 @Component({
   selector: 'app-main-page',
-  imports: [HeaderComponent, OfferCardComponent],
+  imports: [HeaderComponent, OfferCardComponent, LocationsListComponent],
   templateUrl: './main.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
