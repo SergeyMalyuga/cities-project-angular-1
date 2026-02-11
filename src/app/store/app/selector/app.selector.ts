@@ -16,3 +16,8 @@ export const selectAuthStatus = createSelector(
   selectUserState,
   state => state.authorizationStatus
 );
+
+export const selectUserEmail = createSelector(
+  selectUserState,
+  state => state.user?.email
+);
