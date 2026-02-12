@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {CityName} from '../../core/constants/const';
+import {CITY_LOCATIONS, CityName} from '../../core/constants/const';
 import {LocationsItemComponent} from '../locations-item/locations-item.component';
+import {City} from '../../core/models/city';
 
 @Component({
   selector: 'app-locations-list',
@@ -11,6 +12,7 @@ import {LocationsItemComponent} from '../locations-item/locations-item.component
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LocationsListComponent {
-  protected readonly CityName = CityName;
+  @Input({required: true}) currentCity!: City
   public cities = Object.values(CityName);
+  protected readonly CITY_LOCATIONS = CITY_LOCATIONS;
 }
