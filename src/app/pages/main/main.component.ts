@@ -27,4 +27,8 @@ export class MainComponent implements OnInit {
     this.store.select(selectOffers).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(offers => this.offers.set(offers));
     this.store.select(selectCity).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(city => this.currentCity.set(city));
   }
+
+  public changeCity(city: City): void {
+    this.currentCity.set(city);
+  }
 }

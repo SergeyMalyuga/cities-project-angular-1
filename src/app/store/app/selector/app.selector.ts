@@ -7,7 +7,7 @@ const offersSelector = offerAdapter.getSelectors();
 
 const selectUserState = createFeatureSelector<AppState['user']>('user');
 
-const selectCityState = createFeatureSelector<AppState['city']>('currentCity')
+const selectCityState = createFeatureSelector<AppState['city']>('city')
 
 export const selectOffers = createSelector(
   selectOffersState,

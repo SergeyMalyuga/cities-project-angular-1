@@ -1,5 +1,5 @@
 <li class="locations__item">
-  <a appSelectCity [city]="currentCity" class="locations__item-link tabs__item" [class.tabs__item--active]="location.name === currentCity.name" href="#">
+  <a (citySelected)="onCitySelected($event)" appSelectCity [city]="location" class="locations__item-link tabs__item" [class.tabs__item--active]="location.name === currentCity.name" href="#">
     <span>{{ location.name }}</span>
   </a>
 </li>
