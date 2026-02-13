@@ -9,10 +9,11 @@ import {OfferCardComponent} from '../../shared/offer-card/offer-card.component';
 import {LocationsListComponent} from '../../features/locations-list/locations-list.component';
 import {City} from '../../core/models/city';
 import {DEFAULT_CITY} from '../../core/constants/const';
+import {SortByCityPipe} from './pipes/sort-by-city.pipe';
 
 @Component({
   selector: 'app-main-page',
-  imports: [HeaderComponent, OfferCardComponent, LocationsListComponent],
+  imports: [HeaderComponent, OfferCardComponent, LocationsListComponent, SortByCityPipe],
   templateUrl: './main.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
