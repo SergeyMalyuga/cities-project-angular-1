@@ -11,7 +11,16 @@ export class UserEffects {
   private userService = inject(UserService);
 
   checkAuth$ = createEffect(() =>
-    this.actions$.pipe(ofType(UserActions.checkAuth), switchMap(() => this.userService.checkAuth()
-      .pipe(map(user => UserActions.checkAuthSuccess({user})),
-        catchError((error: HttpErrorResponse) => of(UserActions.checkAuthFailure({error: error.message})),)))))
+    this.actions$.pipe(
+      ofType(UserActions.checkAuth),
+      switchMap(() =>
+        this.userService.checkAuth().pipe(
+          map((user) => UserActions.checkAuthSuccess({ user })),
+          catchError((error: HttpErrorResponse) =>
+            of(UserActions.checkAuthFailure({ error: error.message })),
+          ),
+        ),
+      ),
+    ),
+  );
 }

@@ -1,17 +1,22 @@
 <div class="page page--gray page--main">
-  <app-header/>
+  <app-header />
   <main class="page__main page__main--index">
     <h1 class="visually-hidden">Cities</h1>
     <div class="tabs">
       <section class="locations container">
-        <app-locations-list (citySelected)="changeCity($event)" [currentCity]="currentCity()"/>
+        <app-locations-list
+          (citySelected)="changeCity($event)"
+          [currentCity]="currentCity()"
+        />
       </section>
     </div>
     <div class="cities">
       <div class="cities__places-container container">
         <section class="cities__places places">
           <h2 class="visually-hidden">Places</h2>
-          <b class="places__found">312 places to stay in Amsterdam</b>
+          <b class="places__found"
+            >{{ offersAmount() }} places to stay in Amsterdam</b
+          >
           <form class="places__sorting" action="#" method="get">
             <span class="places__sorting-caption">Sort by</span>
             <span class="places__sorting-type" tabindex="0">
@@ -32,8 +37,11 @@
             </ul>
           </form>
           <div class="cities__places-list places__list tabs__content">
-            @for (offer of (offers() | sortByCity: currentCity()); track offer.id) {
-              <app-offer-card [offer]="offer"/>
+            @for (
+              offer of offers() | sortByCity: currentCity();
+              track offer.id
+            ) {
+              <app-offer-card [offer]="offer" />
             }
           </div>
         </section>

@@ -11,7 +11,16 @@ export class OfferEffects {
   private offerService = inject(OfferService);
 
   public loadOffers$ = createEffect(() =>
-    this.actions$.pipe(ofType(OfferActions.loadOffers), switchMap(() => this.offerService.getOffers()
-      .pipe(map(offers => OfferActions.loadOffersSuccess({offers})),
-        catchError((err: HttpErrorResponse) => of(OfferActions.loadOffersFailure({error: err.message})))))))
+    this.actions$.pipe(
+      ofType(OfferActions.loadOffers),
+      switchMap(() =>
+        this.offerService.getOffers().pipe(
+          map((offers) => OfferActions.loadOffersSuccess({ offers })),
+          catchError((err: HttpErrorResponse) =>
+            of(OfferActions.loadOffersFailure({ error: err.message })),
+          ),
+        ),
+      ),
+    ),
+  );
 }

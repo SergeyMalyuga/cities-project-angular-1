@@ -7,24 +7,33 @@ const offersSelector = offerAdapter.getSelectors();
 
 const selectUserState = createFeatureSelector<AppState['user']>('user');
 
-const selectCityState = createFeatureSelector<AppState['city']>('city')
+const selectCityState = createFeatureSelector<AppState['city']>('city');
 
 export const selectOffers = createSelector(
   selectOffersState,
-  offersSelector.selectAll
+  offersSelector.selectAll,
+);
+
+export const selectOffersByCity = createSelector(
+  selectOffersState,
+  selectCityState,
+  (offersState, cityState) =>
+    Object.values(offersState.entities)
+      .filter((offer) => offer !== undefined)
+      .filter((offer) => offer.city.name === cityState.currentCity.name),
 );
 
 export const selectAuthStatus = createSelector(
   selectUserState,
-  state => state.authorizationStatus
+  (state) => state.authorizationStatus,
 );
 
 export const selectUserEmail = createSelector(
   selectUserState,
-  state => state.user?.email
+  (state) => state.user?.email,
 );
 
 export const selectCity = createSelector(
   selectCityState,
-  state => state.currentCity
-)
+  (state) => state.currentCity,
+);
