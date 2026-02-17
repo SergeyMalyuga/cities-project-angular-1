@@ -10,7 +10,7 @@ import {LocationsListComponent} from '../../features/locations-list/locations-li
 import {City} from '../../core/models/city';
 import {DEFAULT_CITY} from '../../core/constants/const';
 import {changeCity} from '../../store/city/actions/city.actions';
-import {FormPlacesSortingComponent} from '../../features/firm-places-sorting/form-places-sorting.component';
+import {FormPlacesSortingComponent} from '../../features/form-places-sorting/form-places-sorting.component';
 
 @Component({
   selector: 'app-main-page',
