@@ -7,6 +7,8 @@
               </svg>
             </span>
   <ul
+    appClickOutside [isOpen]="isOpen()"
+    (outsideClicked)="closeOptions()"
     class="places__options places__options--custom" [class.places__options--opened]="isOpen()"
   >
     <li class="places__option places__option--active" tabindex="0">

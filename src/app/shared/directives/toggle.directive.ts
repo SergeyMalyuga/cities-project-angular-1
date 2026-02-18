@@ -9,7 +9,6 @@ export class ToggleDirective {
 
   @HostListener('click')
   onClick() {
-    console.log('click');
     this.toggled.emit();
   }
   }
