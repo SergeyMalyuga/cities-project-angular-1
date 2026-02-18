@@ -11,11 +11,15 @@
     (outsideClicked)="closeOptions()"
     class="places__options places__options--custom" [class.places__options--opened]="isOpen()"
   >
-    <li class="places__option places__option--active" tabindex="0">
+    <li appSelectSortType [sortType]="SortType.POPULAR" class="places__option places__option--active" tabindex="0">
       Popular
     </li>
-    <li class="places__option" tabindex="0">Price: low to high</li>
-    <li class="places__option" tabindex="0">Price: high to low</li>
-    <li class="places__option" tabindex="0">Top rated first</li>
+    <li appSelectSortType [sortType]="SortType.PRICE_LOW_TO_HIGH" class="places__option" tabindex="0">Price: low to
+      high
+    </li>
+    <li appSelectSortType [sortType]="SortType.PRICE_HIGH_TO_LOW" class="places__option" tabindex="0">Price: high to
+      low
+    </li>
+    <li appSelectSortType [sortType]="SortType.TOP_RATED_FIRST" class="places__option" tabindex="0">Top rated first</li>
   </ul>
 </form>
