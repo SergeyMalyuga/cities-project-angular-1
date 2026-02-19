@@ -1,5 +1,5 @@
 <div class="page page--gray page--main">
-  <app-header />
+  <app-header/>
   <main class="page__main page__main--index">
     <h1 class="visually-hidden">Cities</h1>
     <div class="tabs">
@@ -15,15 +15,13 @@
         <section class="cities__places places">
           <h2 class="visually-hidden">Places</h2>
           <b class="places__found"
-            >{{ offersAmount() }} places to stay in Amsterdam</b
+          >{{ offersAmount() }} places to stay in Amsterdam</b
           >
-<app-form-places-sorting/>
+          <app-form-places-sorting/>
           <div class="cities__places-list places__list tabs__content">
-            @for (
-              offer of offers();
-              track offer.id
-            ) {
-              <app-offer-card [offer]="offer" />
+            @for (offer of offers() | sortBy: sortType();
+              track offer.id) {
+              <app-offer-card [offer]="offer"/>
             }
           </div>
         </section>

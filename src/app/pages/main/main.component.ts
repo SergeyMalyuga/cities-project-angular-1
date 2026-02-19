@@ -8,9 +8,10 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {OfferCardComponent} from '../../shared/offer-card/offer-card.component';
 import {LocationsListComponent} from '../../features/locations-list/locations-list.component';
 import {City} from '../../core/models/city';
-import {DEFAULT_CITY} from '../../core/constants/const';
+import {DEFAULT_CITY, SortType} from '../../core/constants/const';
 import {changeCity} from '../../store/city/actions/city.actions';
 import {FormPlacesSortingComponent} from '../../features/form-places-sorting/form-places-sorting.component';
+import {SortByPipe} from './pipes/sort-by.pipe';
 
 @Component({
   selector: 'app-main-page',
@@ -19,6 +20,7 @@ import {FormPlacesSortingComponent} from '../../features/form-places-sorting/for
     OfferCardComponent,
     LocationsListComponent,
     FormPlacesSortingComponent,
+    SortByPipe,
   ],
   templateUrl: './main.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,6 +32,7 @@ export class MainComponent implements OnInit {
   public offers = signal<OfferPreview[]>([]);
   public currentCity = signal<City>(DEFAULT_CITY);
   public offersAmount = computed(() => this.offers().length);
+  public sortType = signal<SortType>(SortType.POPULAR);
 
   public ngOnInit(): void {
     this.store
@@ -45,4 +48,6 @@ export class MainComponent implements OnInit {
   public changeCity(city: City): void {
     this.store.dispatch(changeCity({city}));
   }
+
+  protected readonly SortType = SortType;
 }
