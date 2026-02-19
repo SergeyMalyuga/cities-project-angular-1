@@ -49,5 +49,7 @@ export class MainComponent implements OnInit {
     this.store.dispatch(changeCity({city}));
   }
 
-  protected readonly SortType = SortType;
+  public changeSortType(sortType: SortType): void {
+    this.sortType.set(sortType);
+  }
 }

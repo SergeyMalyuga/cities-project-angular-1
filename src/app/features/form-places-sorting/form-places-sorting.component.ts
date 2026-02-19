@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output, signal} from '@angular/core';
 import {ToggleDirective} from '../../shared/directives/toggle.directive';
 import {ClickOutsideDirective} from '../../shared/directives/click-outside.directive';
 import {SelectSortTypeDirective} from './directives/select-sort-type.directive';
@@ -16,7 +16,10 @@ import {SortType} from '../../core/constants/const';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormPlacesSortingComponent {
+  @Input({required: true}) currentSortType!: SortType;
+  @Output() sortTypeSelected = new EventEmitter<SortType>();
   public isOpen = signal<boolean>(false);
+  public readonly SortType = SortType;
 
   public toggleOptions() {
     this.isOpen.set(!this.isOpen());
@@ -26,5 +29,8 @@ export class FormPlacesSortingComponent {
     this.isOpen.set(false);
   }
 
-  protected readonly SortType = SortType;
+  public onSortTypeSelected(sortType: SortType) {
+    this.isOpen.set(false);
+    this.sortTypeSelected.emit(sortType);
+  }
 }

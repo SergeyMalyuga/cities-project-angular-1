@@ -17,7 +17,7 @@
           <b class="places__found"
           >{{ offersAmount() }} places to stay in Amsterdam</b
           >
-          <app-form-places-sorting/>
+          <app-form-places-sorting [currentSortType]="sortType()" (sortTypeSelected)="changeSortType($event)"/>
           <div class="cities__places-list places__list tabs__content">
             @for (offer of offers() | sortBy: sortType();
               track offer.id) {
