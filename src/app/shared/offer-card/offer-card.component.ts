@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {OfferPreview} from '../../core/models/offers';
-import {CapitalizePipe} from '../pipes/capitilize.pipe';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { OfferPreview } from '../../core/models/offers';
+import { CapitalizePipe } from '../pipes/capitilize.pipe';
 
 @Component({
   selector: 'app-offer-card',

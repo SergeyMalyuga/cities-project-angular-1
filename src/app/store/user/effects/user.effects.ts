@@ -1,9 +1,9 @@
-import {inject, Injectable} from '@angular/core';
-import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {UserService} from '../../../core/services/user.service';
+import { inject, Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { UserService } from '../../../core/services/user.service';
 import * as UserActions from '../actions/user.actions';
-import {catchError, map, of, switchMap} from 'rxjs';
-import {HttpErrorResponse} from '@angular/common/http';
+import { catchError, map, of, switchMap } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class UserEffects {
@@ -20,6 +20,25 @@ export class UserEffects {
             of(UserActions.checkAuthFailure({ error: error.message })),
           ),
         ),
+      ),
+    ),
+  );
+
+  login$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActions.login),
+      switchMap(({ credentials }) =>
+        this.userService
+          .login({
+            email: credentials.email,
+            password: credentials.password,
+          })
+          .pipe(
+            map((user) => UserActions.loginSuccess({ user })),
+            catchError((error: HttpErrorResponse) =>
+              of(UserActions.loginFailure({ error: error.message })),
+            ),
+          ),
       ),
     ),
   );

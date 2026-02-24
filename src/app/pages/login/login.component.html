@@ -21,7 +21,13 @@
     <div class="page__login-container container">
       <section class="login">
         <h1 class="login__title">Sign in</h1>
-        <form [formGroup]="loginGroup" class="login__form form" action="#" method="post">
+        <form
+          (ngSubmit)="onSubmit()"
+          [formGroup]="loginGroup"
+          class="login__form form"
+          action="#"
+          method="post"
+        >
           <div class="login__input-wrapper form__input-wrapper">
             <label for="email" class="visually-hidden">E-mail</label>
             <input
@@ -33,8 +39,11 @@
               placeholder="Email"
               required=""
             />
-            @if (loginGroup.get('email')?.touched && loginGroup.get('email')?.errors) {
-              @if (loginGroup.get('email')?.errors?.['required']) {
+            @if (
+              loginGroup.get("email")?.touched &&
+              loginGroup.get("email")?.errors
+            ) {
+              @if (loginGroup.get("email")?.errors?.["required"]) {
                 <div class="error">Email обязателен для заполнения</div>
               } @else {
                 <div class="error">Не верный формат email</div>
@@ -52,15 +61,22 @@
               placeholder="Password"
               required=""
             />
-            @if (loginGroup.get('password')?.touched && loginGroup.get('password')?.errors) {
-              @if (loginGroup.get('password')?.errors?.['required']) {
+            @if (
+              loginGroup.get("password")?.touched &&
+              loginGroup.get("password")?.errors
+            ) {
+              @if (loginGroup.get("password")?.errors?.["required"]) {
                 <div class="error">Password обязателен для заполнения</div>
               } @else {
                 <div class="error">Не верный формат password</div>
               }
             }
           </div>
-          <button class="login__submit form__submit button" type="submit" [disabled]="loginGroup.invalid">
+          <button
+            class="login__submit form__submit button"
+            type="submit"
+            [disabled]="loginGroup.invalid"
+          >
             Sign in
           </button>
         </form>

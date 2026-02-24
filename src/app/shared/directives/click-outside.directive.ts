@@ -1,10 +1,18 @@
-import {Directive, ElementRef, EventEmitter, HostListener, inject, Input, Output} from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  inject,
+  Input,
+  Output,
+} from '@angular/core';
 
 @Directive({
-  selector: '[appClickOutside]'
+  selector: '[appClickOutside]',
 })
 export class ClickOutsideDirective {
-  @Input({required: true}) isOpen!: boolean;
+  @Input({ required: true }) isOpen!: boolean;
   @Output() outsideClicked = new EventEmitter<void>();
 
   private elementRef = inject(ElementRef);

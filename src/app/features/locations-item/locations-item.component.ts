@@ -1,6 +1,12 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output,} from '@angular/core';
-import {SelectCityDirective} from '../../shared/directives/select-city.directive';
-import {City} from '../../core/models/city';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { SelectCityDirective } from '../../shared/directives/select-city.directive';
+import { City } from '../../core/models/city';
 
 @Component({
   selector: 'app-locations-item',
