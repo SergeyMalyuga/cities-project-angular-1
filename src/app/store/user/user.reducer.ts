@@ -37,9 +37,9 @@ export const userReducer = createReducer(
     ...state, loading: true,
   })),
   on(loginSuccess, (state, {user}) => ({
-    ...state, user, isLoading: false, error: null,
+    ...state, user, isLoading: false, error: null, authorizationStatus: AuthorizationStatus.AUTH
   })),
   on(loginFailure, (state, {error}) => ({
-    ...state, loading: false, error
+    ...state, loading: false, error, authorizationStatus: AuthorizationStatus.UN_AUTH,
   }))
 );

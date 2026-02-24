@@ -1,11 +1,14 @@
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
-import {RouterLink} from '@angular/router';
-import {AppRoute} from '../../core/constants/const';
+import {ChangeDetectionStrategy, Component, DestroyRef, inject} from '@angular/core';
+import {Router, RouterLink} from '@angular/router';
+import {AppRoute, AuthorizationStatus} from '../../core/constants/const';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators,} from '@angular/forms';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../core/models/app.state';
 import {login} from '../../store/user/actions/user.actions';
 import {Credentials} from '../../core/models/credentials';
+import {selectAuthStatus} from '../../store/app/selector/app.selector';
+import {filter, take} from 'rxjs';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-login-page',
@@ -16,6 +19,8 @@ import {Credentials} from '../../core/models/credentials';
 export class LoginComponent {
   private formBuilder = inject(FormBuilder);
   private store = inject(Store<AppState>);
+  private router = inject(Router);
+  private destroyRef = inject(DestroyRef);
 
   public readonly AppRoute = AppRoute;
 
@@ -30,9 +35,14 @@ export class LoginComponent {
     ],
   });
 
+  public constructor() {
+    this.store.select(selectAuthStatus).pipe(filter(status => status === AuthorizationStatus.AUTH), take(1), takeUntilDestroyed(this.destroyRef)).subscribe(() =>
+      this.router.navigate([AppRoute.MAIN]));
+  }
+
   public onSubmit() {
     if (this.loginGroup.valid) {
-      const { email, password } = this.loginGroup.value;
+      const {email, password} = this.loginGroup.value;
       const credentials: Credentials = {email, password};
       this.store.dispatch(login({credentials}));
     }
