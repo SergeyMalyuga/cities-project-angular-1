@@ -34,7 +34,11 @@
               required=""
             />
             @if (loginGroup.get('email')?.touched && loginGroup.get('email')?.errors) {
-              <div class="error">dfdfdfdf</div>
+              @if (loginGroup.get('email')?.errors?.['required']) {
+                <div class="error">Email обязателен для заполнения</div>
+              } @else {
+                <div class="error">Не верный формат email</div>
+              }
             }
           </div>
           <div class="login__input-wrapper form__input-wrapper">
@@ -48,6 +52,13 @@
               placeholder="Password"
               required=""
             />
+            @if (loginGroup.get('password')?.touched && loginGroup.get('password')?.errors) {
+              @if (loginGroup.get('password')?.errors?.['required']) {
+                <div class="error">Password обязателен для заполнения</div>
+              } @else {
+                <div class="error">Не верный формат password</div>
+              }
+            }
           </div>
           <button class="login__submit form__submit button" type="submit" [disabled]="loginGroup.invalid">
             Sign in

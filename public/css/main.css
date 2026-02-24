@@ -1701,6 +1701,7 @@ img {
   width: 341px;
 }
 .login__input-wrapper {
+  position: relative;
   margin-right: 2px;
 }
 .login__input {
@@ -1813,5 +1814,13 @@ img {
 .header__logo-link:not(.header__logo-link--active):focus,
 .header__logo-link:not(.header__logo-link--active):hover {
   opacity: 0.5;
+}
+
+.error {
+  position: absolute;
+  left: 0;
+  bottom: 3px;
+  width: 100%;
+  background-color: #ff852c;
 }
 /*# sourceMappingURL=main.css.map */
