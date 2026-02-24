@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {AUTH_TOKEN_KEY_NAME} from '../constants/const';
-import {Token} from '../models/token';
+import { Injectable } from '@angular/core';
+import { AUTH_TOKEN_KEY_NAME } from '../constants/const';
+import { Token } from '../models/token';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   public getToken(): Token | null {
@@ -22,7 +22,7 @@ export class AuthService {
 
   public setToken(token: Token) {
     try {
-      if(!token || token.trim() === '') {
+      if (!token || token.trim() === '') {
         return false;
       }
       localStorage.setItem(AUTH_TOKEN_KEY_NAME, token);

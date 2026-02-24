@@ -1,6 +1,6 @@
-import {createAction, props} from '@ngrx/store';
-import {User} from '../../../core/models/user';
-import {Credentials} from '../../../core/models/credentials';
+import { createAction, props } from '@ngrx/store';
+import { User } from '../../../core/models/user';
+import { Credentials } from '../../../core/models/credentials';
 
 export const checkAuth = createAction('[App Component] Check Auth]');
 export const checkAuthSuccess = createAction(
@@ -25,4 +25,7 @@ export const loginFailure = createAction(
 );
 export const logout = createAction('[Header Component] Logout');
 export const logoutSuccess = createAction('[Header Component] Logout Success');
-export const logoutFailure = createAction('[Header Component] Logout Failure', props<{ error: string }>());
+export const logoutFailure = createAction(
+  '[Header Component] Logout Failure',
+  props<{ error: string }>(),
+);

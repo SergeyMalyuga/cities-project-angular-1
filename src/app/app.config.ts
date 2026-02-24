@@ -12,7 +12,7 @@ import { provideEffects } from '@ngrx/effects';
 import { appReducer } from './store/app/app.reducer';
 import { OfferEffects } from './store/offer/effects/offer.effects';
 import { UserEffects } from './store/user/effects/user.effects';
-import {AuthInterceptor} from './core/interceptors/auth.interceptor';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,7 +24,7 @@ export const appConfig: ApplicationConfig = {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
 };
