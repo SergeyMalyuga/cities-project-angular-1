@@ -6,15 +6,40 @@ import {Token} from '../models/token';
   providedIn: 'root'
 })
 export class AuthService {
-  public getToken() {
-    localStorage.getItem(AUTH_TOKEN_KEY_NAME);
+  public getToken(): Token | null {
+    try {
+      const token = localStorage.getItem(AUTH_TOKEN_KEY_NAME);
+      if (token) {
+        return token;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error('Error reading token from localStorage:', error);
+      return null;
+    }
   }
 
   public setToken(token: Token) {
-    localStorage.setItem(AUTH_TOKEN_KEY_NAME, token);
+    try {
+      if(!token || token.trim() === '') {
+        return false;
+      }
+      localStorage.setItem(AUTH_TOKEN_KEY_NAME, token);
+      return true;
+    } catch (error) {
+      console.error('Error set token to localStorage:', error);
+      return false;
+    }
   }
 
   public removeToken() {
-    localStorage.removeItem(AUTH_TOKEN_KEY_NAME);
+    try {
+      localStorage.removeItem(AUTH_TOKEN_KEY_NAME);
+      return true;
+    } catch (error) {
+      console.error('Error deleting token from localStorage:', error);
+      return false;
+    }
   }
 }
