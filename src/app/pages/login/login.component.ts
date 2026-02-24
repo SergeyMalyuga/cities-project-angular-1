@@ -37,7 +37,10 @@ export class LoginComponent {
 
   public constructor() {
     this.store.select(selectAuthStatus).pipe(filter(status => status === AuthorizationStatus.AUTH), take(1), takeUntilDestroyed(this.destroyRef)).subscribe(() =>
-      this.router.navigate([AppRoute.MAIN]));
+    {
+      this.loginGroup.reset();
+      this.router.navigate([AppRoute.MAIN]);
+    })
   }
 
   public onSubmit() {
