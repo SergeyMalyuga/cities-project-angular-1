@@ -1,18 +1,16 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../../core/models/app.state';
-import {
-  selectAuthStatus,
-  selectUserEmail,
-} from '../../../store/app/selector/app.selector';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { AppRoute, AuthorizationStatus } from '../../../core/constants/const';
-import { RouterLink } from '@angular/router';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {NgOptimizedImage} from '@angular/common';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../../core/models/app.state';
+import {selectAuthStatus, selectUserEmail,} from '../../../store/app/selector/app.selector';
+import {toSignal} from '@angular/core/rxjs-interop';
+import {AppRoute, AuthorizationStatus} from '../../../core/constants/const';
+import {RouterLink} from '@angular/router';
+import {SignOutDirective} from '../../directives/sign-out.directive';
 
 @Component({
   selector: 'app-header',
-  imports: [NgOptimizedImage, RouterLink],
+  imports: [NgOptimizedImage, RouterLink, SignOutDirective],
   templateUrl: './header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -25,6 +23,6 @@ export class HeaderComponent {
   public userEmail = toSignal(this.store.select(selectUserEmail), {
     initialValue: null,
   });
-  protected readonly AuthorizationStatus = AuthorizationStatus;
-  protected readonly AppRoute = AppRoute;
+  public readonly AuthorizationStatus = AuthorizationStatus;
+  public readonly AppRoute = AppRoute;
 }
