@@ -7,10 +7,11 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {catchError, EMPTY, forkJoin, switchMap} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../core/models/app.state';
+import {CapitalizePipe} from '../../shared/pipes/capitilize.pipe';
 
 @Component({
   selector: 'app-offer-page',
-  imports: [HeaderComponent],
+  imports: [HeaderComponent, CapitalizePipe],
   templateUrl: './offer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -45,4 +46,6 @@ export class OfferComponent implements OnInit {
       this.offer.set(result.offer)
     );
   }
+
+  protected readonly Math = Math;
 }
