@@ -11,7 +11,7 @@ import {DatePipe} from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReviewsItemComponent {
-  @Input({required: true}) review!: Comment;
+  @Input({required: true}) comment!: Comment;
 
   public readonly Math = Math;
 }

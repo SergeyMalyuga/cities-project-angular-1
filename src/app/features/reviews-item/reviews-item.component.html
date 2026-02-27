@@ -3,26 +3,26 @@
     <div class="reviews__avatar-wrapper user__avatar-wrapper">
       <img
         class="reviews__avatar user__avatar"
-        src="{{review.user.avatarUrl}}"
+        src="{{comment.user.avatarUrl}}"
         width="54"
         height="54"
         alt="Reviews avatar"
       />
     </div>
-    <span class="reviews__user-name"> {{review.user.name}} </span>
+    <span class="reviews__user-name"> {{comment.user.name}} </span>
   </div>
   <div class="reviews__info">
     <div class="reviews__rating rating">
       <div class="reviews__stars rating__stars">
-        <span [style.width.%]="Math.floor(review.rating * 80)"></span>
+        <span [style.width.%]="Math.floor(comment.rating * 80)"></span>
         <span class="visually-hidden">Rating</span>
       </div>
     </div>
     <p class="reviews__text">
-      {{review.comment}}
+      {{comment.comment}}
     </p>
-    <time class="reviews__time" [attr.datetime]="review.date | date:'YYYY-MM-dd' " datetime="2019-04-24"
-    >{{review.date | date:'MMMM YYYY'}}
+    <time class="reviews__time" [attr.datetime]="comment.date | date:'YYYY-MM-dd' " datetime="2019-04-24"
+    >{{comment.date | date:'MMMM YYYY'}}
     </time
     >
   </div>
