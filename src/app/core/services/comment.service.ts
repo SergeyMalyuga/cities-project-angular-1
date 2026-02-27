@@ -10,8 +10,8 @@ import {APIRoute, BASE_URL, RETRY_ATTEMPTS, TIMEOUT_MS} from '../constants/const
 export class CommentService {
   private http = inject(HttpClient);
 
-  public getComments(): Observable<Comment[]> {
-    return this.http.get<Comment[]>(`${BASE_URL}/${APIRoute.COMMENTS}`)
+  public getComments(offerId: string): Observable<Comment[]> {
+    return this.http.get<Comment[]>(`${BASE_URL}/${APIRoute.COMMENTS}/${offerId}`)
       .pipe(timeout(TIMEOUT_MS), retry(RETRY_ATTEMPTS), catchError(this.handleError));
   }
 
