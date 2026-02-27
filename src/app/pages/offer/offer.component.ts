@@ -8,10 +8,11 @@ import {catchError, EMPTY, forkJoin, switchMap} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../core/models/app.state';
 import {CapitalizePipe} from '../../shared/pipes/capitilize.pipe';
+import {ReviewsComponent} from '../../features/reviews/reviews.component';
 
 @Component({
   selector: 'app-offer-page',
-  imports: [HeaderComponent, CapitalizePipe],
+  imports: [HeaderComponent, CapitalizePipe, ReviewsComponent],
   templateUrl: './offer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
