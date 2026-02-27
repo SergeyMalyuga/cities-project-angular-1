@@ -122,6 +122,9 @@ export const FavoriteStatus = {
   ADDED: 1,
 } as const;
 
+export const TIMEOUT_MS = 10000;
+export const RETRY_ATTEMPTS = 3;
+
 export type FavoriteClass = (typeof FavoriteClass)[keyof typeof FavoriteClass];
 
 export const QUANTITY_FIRST_OFFERS = 3;
