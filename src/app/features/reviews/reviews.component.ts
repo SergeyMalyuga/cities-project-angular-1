@@ -11,5 +11,9 @@ import {Comment} from '../../core/models/comments';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReviewsComponent {
-  @Input({required:true}) comments!: Comment[]; //TODO создать computed для отображения в шаблоне кол-во комментариев
+  @Input({required: true}) comments!: Comment[];
+
+  get commentsCount(): number {
+    return this.comments.length
+  }
 }
