@@ -4,13 +4,14 @@ import {OfferService} from '../../core/services/offer.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Offer} from '../../core/models/offers';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {catchError, EMPTY, forkJoin, switchMap} from 'rxjs';
+import {catchError, EMPTY, forkJoin, pipe, Subject, switchMap} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../core/models/app.state';
 import {CapitalizePipe} from '../../shared/pipes/capitilize.pipe';
 import {ReviewsComponent} from '../../features/reviews/reviews.component';
 import {CommentService} from '../../core/services/comment.service';
 import {Comment} from '../../core/models/comments';
+import {NewComment} from '../../core/models/new-comment';
 
 @Component({
   selector: 'app-offer-page',
@@ -24,7 +25,6 @@ export class OfferComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
   private router = inject(Router);
   private destroyRef = inject(DestroyRef);
-  private store = inject(Store<AppState>);
 
   public offer = signal<Offer | undefined>(undefined);
   public comments = signal<Comment[]>([]);
@@ -55,5 +55,5 @@ export class OfferComponent implements OnInit {
     );
   }
 
-  protected readonly Math = Math;
+  public readonly Math = Math;
 }

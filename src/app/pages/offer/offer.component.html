@@ -82,7 +82,7 @@
               </p>
             </div>
           </div>
-          <app-reviews [comments]="comments()"/>
+          <app-reviews [comments]="comments()" (submitted)="postComment($event)"/>
         </div>
       </div>
       <section class="offer__map map"></section>
