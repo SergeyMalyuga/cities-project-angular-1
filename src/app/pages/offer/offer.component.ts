@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, signal,}
 import {HeaderComponent} from '../../shared/components/header/header.component';
 import {OfferService} from '../../core/services/offer.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Offer} from '../../core/models/offers';
+import {Offer, OfferPreview} from '../../core/models/offers';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {
   catchError,
@@ -21,10 +21,12 @@ import {ReviewsComponent} from '../../features/reviews/reviews.component';
 import {CommentService} from '../../core/services/comment.service';
 import {Comment} from '../../core/models/comments';
 import {NewComment} from '../../core/models/new-comment';
+import {OfferCardComponent} from '../../shared/offer-card/offer-card.component';
+import {SlicePipe} from '@angular/common';
 
 @Component({
   selector: 'app-offer-page',
-  imports: [HeaderComponent, CapitalizePipe, ReviewsComponent],
+  imports: [HeaderComponent, CapitalizePipe, ReviewsComponent, OfferCardComponent, SlicePipe],
   templateUrl: './offer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -38,6 +40,7 @@ export class OfferComponent implements OnInit {
 
   public readonly Math = Math;
   public offer = signal<Offer | undefined>(undefined);
+  public nearbyOffers = signal<OfferPreview[]>([]);
   public comments = signal<Comment[]>([]);
   public offerId = signal<string | null>(null);
 
@@ -67,7 +70,10 @@ export class OfferComponent implements OnInit {
             ),
             catchError(() => of([])),
           );
-          return combineLatest({ offer: offer$, comments: comments$ });
+          const nearbyOffers$ = this.offerService.getNearbyOffers(id)
+            .pipe(distinctUntilChanged((prev, curr) => prev.length === curr.length),
+              catchError(() => of([])))
+          return combineLatest({offer: offer$, comments: comments$, nearbyOffers: nearbyOffers$})
         }),
       )
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -75,6 +81,7 @@ export class OfferComponent implements OnInit {
         this.offerId.set(result.offer.id);
         this.offer.set(result.offer);
         this.comments.set(result.comments);
+        this.nearbyOffers.set(result.nearbyOffers);
       });
   }
 
