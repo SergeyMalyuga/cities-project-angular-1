@@ -4,7 +4,19 @@ import {OfferService} from '../../core/services/offer.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Offer} from '../../core/models/offers';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {catchError, EMPTY, forkJoin, pipe, Subject, switchMap} from 'rxjs';
+import {
+  catchError,
+  combineLatest,
+  distinctUntilChanged,
+  EMPTY,
+  filter,
+  forkJoin,
+  map, of,
+  pipe,
+  Subject,
+  switchMap,
+  take
+} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../core/models/app.state';
 import {CapitalizePipe} from '../../shared/pipes/capitilize.pipe';
@@ -26,38 +38,34 @@ export class OfferComponent implements OnInit {
   private router = inject(Router);
   private destroyRef = inject(DestroyRef);
 
+  public readonly Math = Math;
   public offer = signal<Offer | undefined>(undefined);
   public comments = signal<Comment[]>([]);
   public offerId = signal<string | null>(null);
 
   public ngOnInit(): void {
-    this.activatedRoute.paramMap.pipe(
-      switchMap(params => {
-        const id = params.get('id');
-        if (id === null) {
-          this.router.navigate(['/', '**']);
-          return EMPTY;
-        }
-        this.offerId.set(id);
-        return forkJoin({
-          offer: this.offerService.getOfferById(id),
-          comments: this.commentService.getComments(id)
-        }).pipe(
-          catchError(() => {
-            this.router.navigate(['/', '**']);
-            return EMPTY;
-          })
-        )
-      }), takeUntilDestroyed(this.destroyRef)).subscribe(result => {
-        this.offer.set(result.offer);
-        this.comments.set(result.comments);
-      }
-    );
+    this.activatedRoute.paramMap.pipe(map(params => params.get('id')), filter((id): id is string => id !== null),
+      switchMap(id => {
+        const offer$ = this.offerService.getOfferById(id)
+          .pipe(distinctUntilChanged((prev, curr) => prev.id === curr.id),
+            catchError(() => {
+              this.router.navigate(['/', '**']);
+              return EMPTY
+            }));
+        const comments$ = this.commentService.getComments(id)
+          .pipe(distinctUntilChanged((prev, curr) =>
+              prev.length === curr.length && prev.every((comment, index) => comment.id === curr[index].id)),
+            catchError(() => of([]))
+          );
+        return combineLatest({offer: offer$, comments: comments$})
+      })).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(result => {
+      this.offerId.set(result.offer.id);
+      this.offer.set(result.offer);
+      this.comments.set(result.comments);
+    });
   }
 
   public postComment() {
     return null;
   }
-
-  public readonly Math = Math;
 }
