@@ -7,7 +7,7 @@ import {
   checkAuthSuccess,
   login,
   loginFailure,
-  loginSuccess,
+  loginSuccess, logout, logoutFailure, logoutSuccess,
 } from './actions/user.actions';
 
 const initialState: UserState = {
@@ -53,4 +53,13 @@ export const userReducer = createReducer(
     error,
     authorizationStatus: AuthorizationStatus.UN_AUTH,
   })),
+  on(logout, state => ({
+    ...state, isLoading: true
+  })),
+  on(logoutSuccess, state => ({
+    ...state, user: DEFAULT_USER, isLoading: false, error: null, authorizationStatus: AuthorizationStatus.UN_AUTH,
+  })),
+  on(logoutFailure, (state, {error}) => ({
+    ...state, error
+  }))
 );

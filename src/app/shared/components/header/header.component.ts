@@ -6,11 +6,12 @@ import {selectAuthStatus, selectUserEmail,} from '../../../store/app/selector/ap
 import {toSignal} from '@angular/core/rxjs-interop';
 import {AppRoute, AuthorizationStatus} from '../../../core/constants/const';
 import {RouterLink} from '@angular/router';
-import {SignOutDirective} from '../../directives/sign-out.directive';
+import {SignOutDirective} from './directives/sign-out.directive';
+import {logout} from '../../../store/user/actions/user.actions';
 
 @Component({
   selector: 'app-header',
-  imports: [NgOptimizedImage, RouterLink, SignOutDirective],
+  imports: [NgOptimizedImage, RouterLink, SignOutDirective, SignOutDirective],
   templateUrl: './header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -25,4 +26,8 @@ export class HeaderComponent {
   });
   public readonly AuthorizationStatus = AuthorizationStatus;
   public readonly AppRoute = AppRoute;
+
+  public signOut(): void {
+    this.store.dispatch(logout());
+  }
 }

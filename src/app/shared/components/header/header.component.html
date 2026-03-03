@@ -34,6 +34,7 @@
               class="header__nav-link"
               appSignOut
               [authStatus]="authStatus()"
+              (signOuted)="signOut()"
               [routerLink]="
                 authStatus() !== AuthorizationStatus.AUTH
                   ? ['/', AppRoute.LOGIN]
