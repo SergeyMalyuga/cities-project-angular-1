@@ -17,9 +17,9 @@ export class UserEffects {
       ofType(UserActions.checkAuth),
       switchMap(() =>
         this.userService.checkAuth().pipe(
-          map((user) => UserActions.checkAuthSuccess({user})),
+          map((user) => UserActions.checkAuthSuccess({ user })),
           catchError((error: HttpErrorResponse) =>
-            of(UserActions.checkAuthFailure({error: error.message})),
+            of(UserActions.checkAuthFailure({ error: error.message })),
           ),
         ),
       ),
@@ -29,17 +29,17 @@ export class UserEffects {
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActions.login),
-      switchMap(({credentials}) =>
+      switchMap(({ credentials }) =>
         this.userService
           .login({
             email: credentials.email,
             password: credentials.password,
           })
-          .pipe(tap((user) => this.authService.setToken(user.token)),
-            map((user) => UserActions.loginSuccess({user})
-            ),
+          .pipe(
+            tap((user) => this.authService.setToken(user.token)),
+            map((user) => UserActions.loginSuccess({ user })),
             catchError((error: HttpErrorResponse) =>
-              of(UserActions.loginFailure({error: error.message})),
+              of(UserActions.loginFailure({ error: error.message })),
             ),
           ),
       ),
@@ -50,10 +50,11 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(UserActions.logout),
       switchMap(() =>
-        this.userService.logout().pipe(tap(() => this.authService.removeToken()),
+        this.userService.logout().pipe(
+          tap(() => this.authService.removeToken()),
           map(() => UserActions.logoutSuccess()),
           catchError((error: HttpErrorResponse) =>
-            of(UserActions.logoutFailure({error: error.message})),
+            of(UserActions.logoutFailure({ error: error.message })),
           ),
         ),
       ),

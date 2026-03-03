@@ -4,14 +4,12 @@ import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-reviews-item',
-  imports: [
-    DatePipe
-  ],
+  imports: [DatePipe],
   templateUrl: './reviews-item.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReviewsItemComponent {
-  @Input({required: true}) comment!: Comment;
+  @Input({ required: true }) comment!: Comment;
 
   public readonly Math = Math;
 }

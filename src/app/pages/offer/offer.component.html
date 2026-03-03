@@ -1,12 +1,12 @@
 <div class="page">
-  <app-header/>
+  <app-header />
   <main class="page__main page__main--offer">
     <section class="offer">
       <div class="offer__gallery-container container">
         <div class="offer__gallery">
           @for (image of offer()?.images; track image) {
             <div class="offer__image-wrapper">
-              <img class="offer__image" src="{{image}}" alt="Photo studio"/>
+              <img class="offer__image" src="{{ image }}" alt="Photo studio" />
             </div>
           }
         </div>
@@ -31,18 +31,24 @@
           </div>
           <div class="offer__rating rating">
             <div class="offer__stars rating__stars">
-              <span [style.width.%]="Math.floor((offer()?.rating ?? 0) * 80)"></span>
+              <span
+                [style.width.%]="Math.floor((offer()?.rating ?? 0) * 80)"
+              ></span>
               <span class="visually-hidden">Rating</span>
             </div>
             <span class="offer__rating-value rating__value">4.8</span>
           </div>
           <ul class="offer__features">
-            <li class="offer__feature offer__feature--entire">{{ offer()?.type | capitalize }}</li>
-            <li
-              class="offer__feature offer__feature--bedrooms">{{ offer()?.bedrooms }} {{ (offer()?.bedrooms ?? 0) > 1 ? 'Bedrooms' : 'Bedroom' }}
+            <li class="offer__feature offer__feature--entire">
+              {{ offer()?.type | capitalize }}
+            </li>
+            <li class="offer__feature offer__feature--bedrooms">
+              {{ offer()?.bedrooms }}
+              {{ (offer()?.bedrooms ?? 0) > 1 ? "Bedrooms" : "Bedroom" }}
             </li>
             <li class="offer__feature offer__feature--adults">
-              Max {{ offer()?.maxAdults }} {{ (offer()?.maxAdults ?? 0) > 1 ? 'adults' : 'adult' }}
+              Max {{ offer()?.maxAdults }}
+              {{ (offer()?.maxAdults ?? 0) > 1 ? "adults" : "adult" }}
             </li>
           </ul>
           <div class="offer__price">
@@ -65,24 +71,27 @@
               >
                 <img
                   class="offer__avatar user__avatar"
-                  src="{{offer()?.host?.avatarUrl}}"
+                  src="{{ offer()?.host?.avatarUrl }}"
                   width="74"
                   height="74"
                   alt="Host avatar"
                 />
               </div>
-              <span class="offer__user-name"> {{offer()?.host?.name}} </span>
+              <span class="offer__user-name"> {{ offer()?.host?.name }} </span>
               @if (offer()?.host?.isPro) {
                 <span class="offer__user-status"> Pro </span>
               }
             </div>
             <div class="offer__description">
               <p class="offer__text">
-                {{offer()?.description}}
+                {{ offer()?.description }}
               </p>
             </div>
           </div>
-          <app-reviews [comments]="comments()" (submitted)="postComment()"/>
+          <app-reviews
+            [comments]="comments()"
+            (submitted)="postComment($event)"
+          />
         </div>
       </div>
       <section class="offer__map map"></section>

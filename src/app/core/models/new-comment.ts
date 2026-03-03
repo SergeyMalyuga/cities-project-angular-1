@@ -1,4 +1,4 @@
 export interface NewComment {
-  rating: number,
-  comment: string,
+  rating: number;
+  comment: string;
 }

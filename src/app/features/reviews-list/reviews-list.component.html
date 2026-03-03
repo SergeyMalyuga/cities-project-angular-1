@@ -1,5 +1,5 @@
 <ul class="reviews__list">
-  @for (comment of comments; track comment.id) {
-    <app-reviews-item [comment]="comment"/>
+  @for (comment of comments | sortByDate; track comment.id) {
+    <app-reviews-item [comment]="comment" />
   }
 </ul>

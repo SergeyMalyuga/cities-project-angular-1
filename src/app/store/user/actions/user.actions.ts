@@ -1,6 +1,6 @@
-import { createAction, props } from '@ngrx/store';
-import { User } from '../../../core/models/user';
-import { Credentials } from '../../../core/models/credentials';
+import {createAction, props} from '@ngrx/store';
+import {User} from '../../../core/models/user';
+import {Credentials} from '../../../core/models/credentials';
 
 export const checkAuth = createAction('[App Component] Check Auth]');
 export const checkAuthSuccess = createAction(

@@ -1,24 +1,14 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  inject,
-} from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { AppRoute, AuthorizationStatus } from '../../core/constants/const';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../core/models/app.state';
-import { login } from '../../store/user/actions/user.actions';
-import { Credentials } from '../../core/models/credentials';
-import { selectAuthStatus } from '../../store/app/selector/app.selector';
-import { filter, take } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {ChangeDetectionStrategy, Component, DestroyRef, inject,} from '@angular/core';
+import {Router, RouterLink} from '@angular/router';
+import {AppRoute, AuthorizationStatus} from '../../core/constants/const';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators,} from '@angular/forms';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../core/models/app.state';
+import {login} from '../../store/user/actions/user.actions';
+import {Credentials} from '../../core/models/credentials';
+import {selectAuthStatus} from '../../store/app/selector/app.selector';
+import {filter, take} from 'rxjs';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-login-page',

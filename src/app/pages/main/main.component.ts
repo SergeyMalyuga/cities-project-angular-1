@@ -1,28 +1,17 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  DestroyRef,
-  inject,
-  OnInit,
-  signal,
-} from '@angular/core';
-import { HeaderComponent } from '../../shared/components/header/header.component';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../core/models/app.state';
-import { OfferPreview } from '../../core/models/offers';
-import {
-  selectCity,
-  selectOffersByCity,
-} from '../../store/app/selector/app.selector';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { OfferCardComponent } from '../../shared/offer-card/offer-card.component';
-import { LocationsListComponent } from '../../features/locations-list/locations-list.component';
-import { City } from '../../core/models/city';
-import { DEFAULT_CITY, SortType } from '../../core/constants/const';
-import { changeCity } from '../../store/city/actions/city.actions';
-import { FormPlacesSortingComponent } from '../../features/form-places-sorting/form-places-sorting.component';
-import { SortByPipe } from './pipes/sort-by.pipe';
+import {ChangeDetectionStrategy, Component, computed, DestroyRef, inject, OnInit, signal,} from '@angular/core';
+import {HeaderComponent} from '../../shared/components/header/header.component';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../core/models/app.state';
+import {OfferPreview} from '../../core/models/offers';
+import {selectCity, selectOffersByCity,} from '../../store/app/selector/app.selector';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {OfferCardComponent} from '../../shared/offer-card/offer-card.component';
+import {LocationsListComponent} from '../../features/locations-list/locations-list.component';
+import {City} from '../../core/models/city';
+import {DEFAULT_CITY, SortType} from '../../core/constants/const';
+import {changeCity} from '../../store/city/actions/city.actions';
+import {FormPlacesSortingComponent} from '../../features/form-places-sorting/form-places-sorting.component';
+import {SortByPipe} from './pipes/sort-by.pipe';
 
 @Component({
   selector: 'app-main-page',
