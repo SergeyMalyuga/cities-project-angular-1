@@ -55,5 +55,9 @@ export class OfferComponent implements OnInit {
     );
   }
 
+  public postComment() {
+    return null;
+  }
+
   public readonly Math = Math;
 }

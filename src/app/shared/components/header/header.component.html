@@ -33,7 +33,7 @@
               [authStatus]="authStatus()"
               [routerLink]="
                 authStatus() !== AuthorizationStatus.AUTH
-                  ? [AppRoute.LOGIN]
+                  ? ['/', AppRoute.LOGIN]
                   : []
               "
             >
