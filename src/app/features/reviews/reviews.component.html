@@ -3,5 +3,7 @@
     Reviews &middot; <span class="reviews__amount">{{ commentsCount }}</span>
   </h2>
   <app-reviews-list [comments]="comments" />
-  <app-reviews-form (submitted)="onSubmitted($event)" />
+  @if (authStatus() === AuthorizationStatus.AUTH) {
+    <app-reviews-form (submitted)="onSubmitted($event)" />
+  }
 </section>
