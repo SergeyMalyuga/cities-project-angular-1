@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, DestroyRef, inject,} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
-import {AppRoute, AuthorizationStatus} from '../../core/constants/const';
+import {AppRoute, AuthorizationStatus, CITY_LOCATIONS} from '../../core/constants/const';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators,} from '@angular/forms';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../core/models/app.state';
@@ -23,6 +23,7 @@ export class LoginComponent {
   private destroyRef = inject(DestroyRef);
 
   public readonly AppRoute = AppRoute;
+  public readonly randomCity = CITY_LOCATIONS[this.getRandomIndex()];
 
   public loginGroup: FormGroup = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
@@ -55,5 +56,9 @@ export class LoginComponent {
       const credentials: Credentials = { email, password };
       this.store.dispatch(login({ credentials }));
     }
+  }
+
+  private getRandomIndex(): number {
+    return Math.floor(Math.random() * CITY_LOCATIONS.length);
   }
 }
