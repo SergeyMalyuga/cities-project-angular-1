@@ -1,13 +1,16 @@
-import {UserState} from '../../core/models/user.state';
-import {AuthorizationStatus, DEFAULT_USER} from '../../core/constants/const';
-import {createReducer, on} from '@ngrx/store';
+import { UserState } from '../../core/models/user.state';
+import { AuthorizationStatus, DEFAULT_USER } from '../../core/constants/const';
+import { createReducer, on } from '@ngrx/store';
 import {
   checkAuth,
   checkAuthFailure,
   checkAuthSuccess,
   login,
   loginFailure,
-  loginSuccess, logout, logoutFailure, logoutSuccess,
+  loginSuccess,
+  logout,
+  logoutFailure,
+  logoutSuccess,
 } from './actions/user.actions';
 
 const initialState: UserState = {
@@ -53,13 +56,19 @@ export const userReducer = createReducer(
     error,
     authorizationStatus: AuthorizationStatus.UN_AUTH,
   })),
-  on(logout, state => ({
-    ...state, isLoading: true
+  on(logout, (state) => ({
+    ...state,
+    isLoading: true,
   })),
-  on(logoutSuccess, state => ({
-    ...state, user: DEFAULT_USER, isLoading: false, error: null, authorizationStatus: AuthorizationStatus.UN_AUTH,
+  on(logoutSuccess, (state) => ({
+    ...state,
+    user: DEFAULT_USER,
+    isLoading: false,
+    error: null,
+    authorizationStatus: AuthorizationStatus.UN_AUTH,
   })),
-  on(logoutFailure, (state, {error}) => ({
-    ...state, error
-  }))
+  on(logoutFailure, (state, { error }) => ({
+    ...state,
+    error,
+  })),
 );

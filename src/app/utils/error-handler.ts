@@ -1,5 +1,5 @@
-import {HttpErrorResponse} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 
 export function handleError(
   error: HttpErrorResponse | ErrorEvent,
@@ -7,13 +7,13 @@ export function handleError(
   let errorMessage = 'Unknown error occurred';
 
   if (error instanceof ErrorEvent) {
-  // Ошибка на стороне клиента
-  errorMessage = `Client error: ${error.message}`;
-} else {
-  // Ошибка от сервера
-  errorMessage = `Server error ${error.status}: ${error.message}`;
-}
+    // Ошибка на стороне клиента
+    errorMessage = `Client error: ${error.message}`;
+  } else {
+    // Ошибка от сервера
+    errorMessage = `Server error ${error.status}: ${error.message}`;
+  }
 
-console.error('API Request Error:', errorMessage, error);
-return throwError(() => new Error(errorMessage));
+  console.error('API Request Error:', errorMessage, error);
+  return throwError(() => new Error(errorMessage));
 }

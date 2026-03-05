@@ -1,9 +1,9 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {catchError, Observable, retry, timeout} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Comment} from '../models/comments';
-import {APIRoute, BASE_URL, RETRY_ATTEMPTS, TIMEOUT_MS,} from '../constants/const';
-import {handleError} from '../../utils/error-handler';
+import {APIRoute, BASE_URL,} from '../constants/const';
+import {defaultHttpPipe} from '../../utils/rxjs-operators';
 
 @Injectable({
   providedIn: 'root',
@@ -14,11 +14,7 @@ export class CommentService {
   public getComments(offerId: string): Observable<Comment[]> {
     return this.http
       .get<Comment[]>(`${BASE_URL}/${APIRoute.COMMENTS}/${offerId}`)
-      .pipe(
-        timeout(TIMEOUT_MS),
-        retry(RETRY_ATTEMPTS),
-        catchError(handleError),
-      );
+      .pipe(...defaultHttpPipe<Comment[]>());
   }
 
   public postComment(
@@ -31,10 +27,6 @@ export class CommentService {
         comment,
         rating,
       })
-      .pipe(
-        timeout(TIMEOUT_MS),
-        retry(RETRY_ATTEMPTS),
-        catchError(handleError),
-      );
+      .pipe(...defaultHttpPipe<Comment>());
   }
 }

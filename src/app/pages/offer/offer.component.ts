@@ -1,9 +1,16 @@
-import {ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, signal,} from '@angular/core';
-import {HeaderComponent} from '../../shared/components/header/header.component';
-import {OfferService} from '../../core/services/offer.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Offer, OfferPreview} from '../../core/models/offers';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
+import { HeaderComponent } from '../../shared/components/header/header.component';
+import { OfferService } from '../../core/services/offer.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Offer, OfferPreview } from '../../core/models/offers';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   catchError,
   combineLatest,
@@ -16,17 +23,23 @@ import {
   Subject,
   switchMap,
 } from 'rxjs';
-import {CapitalizePipe} from '../../shared/pipes/capitilize.pipe';
-import {ReviewsComponent} from '../../features/reviews/reviews.component';
-import {CommentService} from '../../core/services/comment.service';
-import {Comment} from '../../core/models/comments';
-import {NewComment} from '../../core/models/new-comment';
-import {OfferCardComponent} from '../../shared/offer-card/offer-card.component';
-import {SlicePipe} from '@angular/common';
+import { CapitalizePipe } from '../../shared/pipes/capitilize.pipe';
+import { ReviewsComponent } from '../../features/reviews/reviews.component';
+import { CommentService } from '../../core/services/comment.service';
+import { Comment } from '../../core/models/comments';
+import { NewComment } from '../../core/models/new-comment';
+import { OfferCardComponent } from '../../shared/offer-card/offer-card.component';
+import { SlicePipe } from '@angular/common';
 
 @Component({
   selector: 'app-offer-page',
-  imports: [HeaderComponent, CapitalizePipe, ReviewsComponent, OfferCardComponent, SlicePipe],
+  imports: [
+    HeaderComponent,
+    CapitalizePipe,
+    ReviewsComponent,
+    OfferCardComponent,
+    SlicePipe,
+  ],
   templateUrl: './offer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -70,10 +83,15 @@ export class OfferComponent implements OnInit {
             ),
             catchError(() => of([])),
           );
-          const nearbyOffers$ = this.offerService.getNearbyOffers(id)
-            .pipe(distinctUntilChanged((prev, curr) => prev.length === curr.length),
-              catchError(() => of([])))
-          return combineLatest({offer: offer$, comments: comments$, nearbyOffers: nearbyOffers$})
+          const nearbyOffers$ = this.offerService.getNearbyOffers(id).pipe(
+            distinctUntilChanged((prev, curr) => prev.length === curr.length),
+            catchError(() => of([])),
+          );
+          return combineLatest({
+            offer: offer$,
+            comments: comments$,
+            nearbyOffers: nearbyOffers$,
+          });
         }),
       )
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -88,7 +106,7 @@ export class OfferComponent implements OnInit {
   public postComment(newComment: NewComment) {
     const id = this.offerId();
     if (id) {
-      console.log(newComment.rating)
+      console.log(newComment.rating);
       this.commentService
         .postComment(id, newComment.comment, Number(newComment.rating))
         .subscribe(() => this.refreshComments$.next());

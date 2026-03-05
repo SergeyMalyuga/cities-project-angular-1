@@ -100,8 +100,11 @@
       <section class="near-places places">
         <h2 class="near-places__title">Other places in the neighbourhood</h2>
         <div class="near-places__list places__list">
-          @for (nearbyOffer of nearbyOffers() | slice: 0: 3; track nearbyOffer.id) {
-            <app-offer-card [offer]="nearbyOffer"/>
+          @for (
+            nearbyOffer of nearbyOffers() | slice: 0 : 3;
+            track nearbyOffer.id
+          ) {
+            <app-offer-card [offer]="nearbyOffer" />
           }
         </div>
       </section>

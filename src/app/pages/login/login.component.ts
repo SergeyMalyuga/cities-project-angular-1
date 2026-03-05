@@ -1,17 +1,31 @@
-import {ChangeDetectionStrategy, Component, DestroyRef, inject,} from '@angular/core';
-import {Router, RouterLink} from '@angular/router';
-import {AppRoute, AuthorizationStatus, CITY_LOCATIONS} from '../../core/constants/const';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators,} from '@angular/forms';
-import {Store} from '@ngrx/store';
-import {AppState} from '../../core/models/app.state';
-import {login} from '../../store/user/actions/user.actions';
-import {Credentials} from '../../core/models/credentials';
-import {selectAuthStatus} from '../../store/app/selector/app.selector';
-import {filter, take} from 'rxjs';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {SelectCityDirective} from '../../shared/directives/select-city.directive';
-import {City} from '../../core/models/city';
-import {changeCity} from '../../store/city/actions/city.actions';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+} from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import {
+  AppRoute,
+  AuthorizationStatus,
+  CITY_LOCATIONS,
+} from '../../core/constants/const';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../core/models/app.state';
+import { login } from '../../store/user/actions/user.actions';
+import { Credentials } from '../../core/models/credentials';
+import { selectAuthStatus } from '../../store/app/selector/app.selector';
+import { filter, take } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SelectCityDirective } from '../../shared/directives/select-city.directive';
+import { City } from '../../core/models/city';
+import { changeCity } from '../../store/city/actions/city.actions';
 
 @Component({
   selector: 'app-login-page',
@@ -55,9 +69,9 @@ export class LoginComponent {
 
   public onSubmit() {
     if (this.loginGroup.valid) {
-      const {email, password} = this.loginGroup.value;
-      const credentials: Credentials = {email, password};
-      this.store.dispatch(login({credentials}));
+      const { email, password } = this.loginGroup.value;
+      const credentials: Credentials = { email, password };
+      this.store.dispatch(login({ credentials }));
     }
   }
 
@@ -66,7 +80,7 @@ export class LoginComponent {
   }
 
   public changeCity(city: City) {
-    this.store.dispatch(changeCity({city}));
+    this.store.dispatch(changeCity({ city }));
     this.router.navigate([AppRoute.MAIN]);
   }
 }

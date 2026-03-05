@@ -1,8 +1,15 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output, signal,} from '@angular/core';
-import {ToggleDirective} from '../../shared/directives/toggle.directive';
-import {ClickOutsideDirective} from '../../shared/directives/click-outside.directive';
-import {SelectSortTypeDirective} from './directives/select-sort-type.directive';
-import {SortType} from '../../core/constants/const';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  signal,
+} from '@angular/core';
+import { ToggleDirective } from '../../shared/directives/toggle.directive';
+import { ClickOutsideDirective } from '../../shared/directives/click-outside.directive';
+import { SelectSortTypeDirective } from './directives/select-sort-type.directive';
+import { SortType } from '../../core/constants/const';
 
 @Component({
   selector: 'app-form-places-sorting',

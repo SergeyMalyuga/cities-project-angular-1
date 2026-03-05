@@ -1,8 +1,8 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {OfferPreview} from '../../core/models/offers';
-import {CapitalizePipe} from '../pipes/capitilize.pipe';
-import {RouterLink} from '@angular/router';
-import {AppRoute} from '../../core/constants/const';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { OfferPreview } from '../../core/models/offers';
+import { CapitalizePipe } from '../pipes/capitilize.pipe';
+import { RouterLink } from '@angular/router';
+import { AppRoute } from '../../core/constants/const';
 
 @Component({
   selector: 'app-offer-card',

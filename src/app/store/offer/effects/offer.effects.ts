@@ -1,9 +1,9 @@
-import {inject, Injectable} from '@angular/core';
-import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {OfferService} from '../../../core/services/offer.service';
+import { inject, Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { OfferService } from '../../../core/services/offer.service';
 import * as OfferActions from '../actions/offer.actions';
-import {catchError, map, of, switchMap} from 'rxjs';
-import {HttpErrorResponse} from '@angular/common/http';
+import { catchError, map, of, switchMap } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class OfferEffects {
