@@ -1,9 +1,13 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AppState } from '../../../core/models/app.state';
 import { offerAdapter } from '../../offer/offer.reducer';
+import {favoriteOfferAdapter} from '../../favorite-offer/favorite-offer.reducer';
 
 const selectOffersState = createFeatureSelector<AppState['offers']>('offers');
-const offersSelector = offerAdapter.getSelectors();
+const offersSelectors = offerAdapter.getSelectors();
+
+const selectFavoriteOffersState = createFeatureSelector<AppState['favoriteOffers']>('favoriteOffers');
+const favoriteOffersSelectors = favoriteOfferAdapter.getSelectors();
 
 const selectUserState = createFeatureSelector<AppState['user']>('user');
 
@@ -11,7 +15,7 @@ const selectCityState = createFeatureSelector<AppState['city']>('city');
 
 export const selectOffers = createSelector(
   selectOffersState,
-  offersSelector.selectAll,
+  offersSelectors.selectAll,
 );
 
 export const selectOffersByCity = createSelector(
@@ -37,3 +41,8 @@ export const selectCity = createSelector(
   selectCityState,
   (state) => state.currentCity,
 );
+
+export const selectFavoriteOffers = createSelector(
+  selectFavoriteOffersState,
+  favoriteOffersSelectors.selectAll,
+)
