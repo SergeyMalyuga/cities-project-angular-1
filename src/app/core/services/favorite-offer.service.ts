@@ -16,7 +16,7 @@ import { handleError } from '../../utils/error-handler';
 export class FavoriteOfferService {
   private http = inject(HttpClient);
 
-  public getFavoritesOffers(): Observable<OfferPreview[]> {
+  public getFavoriteOffers(): Observable<OfferPreview[]> {
     return this.http
       .get<OfferPreview[]>(`${BASE_URL}/${APIRoute.FAVORITE}`)
       .pipe(

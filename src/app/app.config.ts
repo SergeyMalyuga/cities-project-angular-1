@@ -13,6 +13,7 @@ import { appReducer } from './store/app/app.reducer';
 import { OfferEffects } from './store/offer/effects/offer.effects';
 import { UserEffects } from './store/user/effects/user.effects';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import {FavoriteOfferEffects} from './store/favorite-offer/effects/favorite-offer.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
     provideStore(appReducer),
-    provideEffects(OfferEffects, UserEffects),
+    provideEffects(OfferEffects, UserEffects, FavoriteOfferEffects),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
