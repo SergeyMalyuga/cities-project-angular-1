@@ -11,7 +11,7 @@ import {
 })
 export class ToggleDirective {
   @Output() toggled = new EventEmitter<void>();
-  @Input({ required: true }) isOpen!: boolean;
+  @Input() isOpen = false;
 
   @HostListener('click')
   onClick() {

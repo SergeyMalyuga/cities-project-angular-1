@@ -7,10 +7,11 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../../core/models/app.state';
 import {selectAuthStatus} from '../../store/app/selector/app.selector';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {ToggleDirective} from '../directives/toggle.directive';
 
 @Component({
   selector: 'app-offer-card',
-  imports: [CapitalizePipe, RouterLink],
+  imports: [CapitalizePipe, RouterLink, ToggleDirective],
   templateUrl: './offer-card.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
