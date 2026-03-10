@@ -17,6 +17,7 @@ import { AppState } from '../../core/models/app.state';
 import { selectAuthStatus } from '../../store/app/selector/app.selector';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ToggleDirective } from '../directives/toggle.directive';
+import {changeFavoriteStatus} from '../../store/favorite-offer/actions/favorite-offer.actions';
 
 @Component({
   selector: 'app-offer-card',
@@ -34,15 +35,17 @@ export class OfferCardComponent implements OnInit {
   public readonly AuthorizationStatus = AuthorizationStatus;
   public readonly Math = Math;
   public readonly AppRoute = AppRoute;
-  public isFavoriteBtnActive = computed(
-    () =>
-      this.authStatus() === AuthorizationStatus.AUTH && this.offer.isFavorite,
-  );
+  public isToggleBtnDisable = signal<boolean>(false)
 
-  public ngOnInit(): void {
+  public ngOnInit(): void { //TODO реализовать блокировку кнопки toggle
     this.store
       .select(selectAuthStatus)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((status) => this.authStatus.set(status));
+  }
+
+  public toggleStatus() {
+    this.isToggleBtnDisable.set(true);
+   this.store.dispatch(changeFavoriteStatus({offerId: this.offer.id, status: +!this.offer.isFavorite}));
   }
 }

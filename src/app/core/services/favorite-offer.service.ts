@@ -31,7 +31,7 @@ export class FavoriteOfferService {
     status: number,
   ): Observable<Offer> {
     return this.http
-      .post<Offer>(`${BASE_URL}/${APIRoute.FAVORITE}/${status}`, {
+      .post<Offer>(`${BASE_URL}/${APIRoute.FAVORITE}/${offerId}/${status}`, {
         offerId,
         status,
       })
