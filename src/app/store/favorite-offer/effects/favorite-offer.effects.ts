@@ -1,7 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { FavoriteOfferService } from '../../../core/services/favorite-offer.service';
-import { createAction } from '@ngrx/store';
 import * as FavoriteActions from '../actions/favorite-offer.actions';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -24,6 +23,26 @@ export class FavoriteOfferEffects {
           catchError((error: HttpErrorResponse) =>
             of(
               FavoriteActions.loadFavoriteOffersFailure({
+                error: error.message,
+              }),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  public changeStatus$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(FavoriteActions.changeFavoriteStatus),
+      switchMap(({ offerId, status }) =>
+        this.favoriteOfferService.changeFavoriteStatus(offerId, status).pipe(
+          map((offer) =>
+            FavoriteActions.changeFavoriteStatusSuccess({ offer }),
+          ),
+          catchError((error: HttpErrorResponse) =>
+            of(
+              FavoriteActions.changeFavoriteStatusFailure({
                 error: error.message,
               }),
             ),
