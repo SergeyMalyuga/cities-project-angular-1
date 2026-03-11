@@ -27,6 +27,7 @@
         appToggle
         (toggled)="toggleStatus()"
         type="button"
+        [disabled]="isFavoriteBtnDisable()"
       >
         <svg class="place-card__bookmark-icon" width="18" height="19">
           <use xlink:href="#icon-bookmark"></use>
