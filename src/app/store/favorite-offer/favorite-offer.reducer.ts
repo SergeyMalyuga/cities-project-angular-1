@@ -9,6 +9,7 @@ import {
   loadFavoriteOffersSuccess,
 } from './actions/favorite-offer.actions';
 import {of} from 'rxjs';
+import {loginSuccess, logoutSuccess} from '../user/actions/user.actions';
 
 export const favoriteOfferAdapter = createEntityAdapter<OfferPreview>();
 const initialState: FavoriteOffersState = favoriteOfferAdapter.getInitialState({
@@ -47,5 +48,7 @@ export const favoriteOffersReducer = createReducer(
   ),
   on(loadFavoriteOffersFailure, (state, {error}) => ({
     ...state, error, isLoading: false,
-  }))
+  })),
+  on(logoutSuccess, state =>
+    favoriteOfferAdapter.removeAll(state))
 );
