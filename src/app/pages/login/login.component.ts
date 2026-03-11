@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
-  inject,
+  inject, OnInit,
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {
@@ -26,6 +26,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SelectCityDirective } from '../../shared/directives/select-city.directive';
 import { City } from '../../core/models/city';
 import { changeCity } from '../../store/city/actions/city.actions';
+import {loadFavoriteOffers} from '../../store/favorite-offer/actions/favorite-offer.actions';
+import {loadOffers} from '../../store/offer/actions/offer.actions';
 
 @Component({
   selector: 'app-login-page',
@@ -33,7 +35,7 @@ import { changeCity } from '../../store/city/actions/city.actions';
   templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   private formBuilder = inject(FormBuilder);
   private store = inject(Store<AppState>);
   private router = inject(Router);
@@ -53,7 +55,7 @@ export class LoginComponent {
     ],
   });
 
-  public constructor() {
+  ngOnInit(): void {
     this.store
       .select(selectAuthStatus)
       .pipe(
@@ -63,9 +65,11 @@ export class LoginComponent {
       )
       .subscribe(() => {
         this.loginGroup.reset();
+        this.store.dispatch(loadFavoriteOffers());
+        this.store.dispatch(loadOffers());
         this.router.navigate([AppRoute.MAIN]);
       });
-  }
+    }
 
   public onSubmit() {
     if (this.loginGroup.valid) {

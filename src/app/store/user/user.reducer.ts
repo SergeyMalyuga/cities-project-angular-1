@@ -41,7 +41,7 @@ export const userReducer = createReducer(
   })),
   on(login, (state) => ({
     ...state,
-    loading: true,
+    isLoading: true,
   })),
   on(loginSuccess, (state, { user }) => ({
     ...state,
