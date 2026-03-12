@@ -17,6 +17,5 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(loadOffers());
     this.store.dispatch(checkAuth());
-    this.store.dispatch(loadFavoriteOffers());
   }
 }

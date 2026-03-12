@@ -2,7 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {FavoriteOfferService} from '../../../core/services/favorite-offer.service';
 import * as FavoriteActions from '../actions/favorite-offer.actions';
-import {catchError, combineLatest, EMPTY, filter, map, of, switchMap, withLatestFrom} from 'rxjs';
+import {catchError, combineLatest, distinctUntilChanged, filter, map, of, switchMap} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../../core/models/app.state';
@@ -21,11 +21,13 @@ export class FavoriteOfferEffects {
     combineLatest([
       this.actions$.pipe(ofType(FavoriteActions.loadFavoriteOffers)),
       this.store.select(selectAuthStatus)
-    ]).pipe(filter(([, authStatus]) => authStatus === AuthorizationStatus.AUTH),
+    ]).pipe(
+      distinctUntilChanged(([, prev], [, curr]) => prev === curr),
+      filter(([, authStatus]) => authStatus === AuthorizationStatus.AUTH),
       switchMap(() =>
         this.favoriteOfferService.getFavoriteOffers().pipe(
           map((favoriteOffers) =>
-            FavoriteActions.loadFavoriteOffersSuccess({ favoriteOffers }),
+            FavoriteActions.loadFavoriteOffersSuccess({favoriteOffers}),
           ),
           catchError((error: HttpErrorResponse) =>
             of(FavoriteActions.loadFavoriteOffersFailure({
