@@ -23,7 +23,10 @@
       </div>
       <button
         class="place-card__bookmark-button button"
-        [class.place-card__bookmark-button--active]=" this.authStatus() === AuthorizationStatus.AUTH && this.offer.isFavorite"
+        [class.place-card__bookmark-button--active]="
+          this.authStatus() === AuthorizationStatus.AUTH &&
+          this.offer.isFavorite
+        "
         appToggle
         (toggled)="toggleStatus()"
         type="button"

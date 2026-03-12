@@ -49,8 +49,7 @@ export class MainComponent implements OnInit {
     this.store
       .select(selectOffersByCity)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((offers) =>
-        this.offers.set(offers));
+      .subscribe((offers) => this.offers.set(offers));
     this.store
       .select(selectCity)
       .pipe(takeUntilDestroyed(this.destroyRef))

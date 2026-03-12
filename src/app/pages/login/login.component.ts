@@ -2,7 +2,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
-  inject, OnInit,
+  inject,
+  OnInit,
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {
@@ -26,8 +27,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SelectCityDirective } from '../../shared/directives/select-city.directive';
 import { City } from '../../core/models/city';
 import { changeCity } from '../../store/city/actions/city.actions';
-import {loadFavoriteOffers} from '../../store/favorite-offer/actions/favorite-offer.actions';
-import {loadOffers} from '../../store/offer/actions/offer.actions';
+import { loadFavoriteOffers } from '../../store/favorite-offer/actions/favorite-offer.actions';
+import { loadOffers } from '../../store/offer/actions/offer.actions';
 
 @Component({
   selector: 'app-login-page',
@@ -69,7 +70,7 @@ export class LoginComponent implements OnInit {
         this.store.dispatch(loadOffers());
         this.router.navigate([AppRoute.MAIN]);
       });
-    }
+  }
 
   public onSubmit() {
     if (this.loginGroup.valid) {

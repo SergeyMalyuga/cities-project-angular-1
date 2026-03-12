@@ -3,7 +3,8 @@ import { NgOptimizedImage } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../core/models/app.state';
 import {
-  selectAuthStatus, selectFavoriteOffersCount,
+  selectAuthStatus,
+  selectFavoriteOffersCount,
   selectUserEmail,
 } from '../../../store/app/selector/app.selector';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -27,7 +28,9 @@ export class HeaderComponent {
   public userEmail = toSignal(this.store.select(selectUserEmail), {
     initialValue: null,
   });
-  public favoriteOffersTotal = toSignal(this.store.select(selectFavoriteOffersCount));
+  public favoriteOffersTotal = toSignal(
+    this.store.select(selectFavoriteOffersCount),
+  );
 
   public readonly AuthorizationStatus = AuthorizationStatus;
   public readonly AppRoute = AppRoute;

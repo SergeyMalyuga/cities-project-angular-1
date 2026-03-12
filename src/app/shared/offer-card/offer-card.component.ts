@@ -1,15 +1,25 @@
-import {ChangeDetectionStrategy, Component, DestroyRef, inject, Input, OnInit, signal,} from '@angular/core';
-import {OfferPreview} from '../../core/models/offers';
-import {CapitalizePipe} from '../pipes/capitilize.pipe';
-import {RouterLink} from '@angular/router';
-import {AppRoute, AuthorizationStatus} from '../../core/constants/const';
-import {Store} from '@ngrx/store';
-import {AppState} from '../../core/models/app.state';
-import {selectAuthStatus, selectIsFavoriteOfferLoading} from '../../store/app/selector/app.selector';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {ToggleDirective} from '../directives/toggle.directive';
-import {changeFavoriteStatus} from '../../store/favorite-offer/actions/favorite-offer.actions';
-import {filter} from 'rxjs';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  Input,
+  OnInit,
+  signal,
+} from '@angular/core';
+import { OfferPreview } from '../../core/models/offers';
+import { CapitalizePipe } from '../pipes/capitilize.pipe';
+import { RouterLink } from '@angular/router';
+import { AppRoute, AuthorizationStatus } from '../../core/constants/const';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../core/models/app.state';
+import {
+  selectAuthStatus,
+  selectIsFavoriteOfferLoading,
+} from '../../store/app/selector/app.selector';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ToggleDirective } from '../directives/toggle.directive';
+import { changeFavoriteStatus } from '../../store/favorite-offer/actions/favorite-offer.actions';
 
 @Component({
   selector: 'app-offer-card',
@@ -18,7 +28,7 @@ import {filter} from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OfferCardComponent implements OnInit {
-  @Input({required: true}) offer!: OfferPreview;
+  @Input({ required: true }) offer!: OfferPreview;
 
   private store = inject(Store<AppState>);
   private destroyRef = inject(DestroyRef);
@@ -27,7 +37,7 @@ export class OfferCardComponent implements OnInit {
   public readonly AuthorizationStatus = AuthorizationStatus;
   public readonly Math = Math;
   public readonly AppRoute = AppRoute;
-  public isFavoriteBtnDisable = signal<boolean>(false)
+  public isFavoriteBtnDisable = signal<boolean>(false);
 
   public ngOnInit(): void {
     this.store
@@ -35,13 +45,20 @@ export class OfferCardComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((status) => this.authStatus.set(status));
 
-    this.store.select(selectIsFavoriteOfferLoading).pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(isLoading => this.isFavoriteBtnDisable.set(isLoading));
+    this.store
+      .select(selectIsFavoriteOfferLoading)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((isLoading) => this.isFavoriteBtnDisable.set(isLoading));
   }
 
   public toggleStatus() {
-    if(this.authStatus() === AuthorizationStatus.AUTH) {
-      this.store.dispatch(changeFavoriteStatus({offerId: this.offer.id, status: +!this.offer.isFavorite}));
+    if (this.authStatus() === AuthorizationStatus.AUTH) {
+      this.store.dispatch(
+        changeFavoriteStatus({
+          offerId: this.offer.id,
+          status: +!this.offer.isFavorite,
+        }),
+      );
     }
   }
 }
