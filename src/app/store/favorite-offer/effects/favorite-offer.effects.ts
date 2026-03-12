@@ -1,9 +1,13 @@
-import { inject, Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { FavoriteOfferService } from '../../../core/services/favorite-offer.service';
+import {inject, Injectable} from '@angular/core';
+import {Actions, createEffect, ofType} from '@ngrx/effects';
+import {FavoriteOfferService} from '../../../core/services/favorite-offer.service';
 import * as FavoriteActions from '../actions/favorite-offer.actions';
-import { catchError, map, of, switchMap } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import {catchError, combineLatest, EMPTY, filter, map, of, switchMap, withLatestFrom} from 'rxjs';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../../core/models/app.state';
+import {selectAuthStatus} from '../../app/selector/app.selector';
+import {AuthorizationStatus} from '../../../core/constants/const';
 
 @Injectable({
   providedIn: 'root',
@@ -11,34 +15,34 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class FavoriteOfferEffects {
   private actions$ = inject(Actions);
   private favoriteOfferService = inject(FavoriteOfferService);
+  private store = inject(Store<AppState>);
 
   public loadFavoriteOffers$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(FavoriteActions.loadFavoriteOffers),
+    combineLatest([
+      this.actions$.pipe(ofType(FavoriteActions.loadFavoriteOffers)),
+      this.store.select(selectAuthStatus)
+    ]).pipe(filter(([, authStatus]) => authStatus === AuthorizationStatus.AUTH),
       switchMap(() =>
         this.favoriteOfferService.getFavoriteOffers().pipe(
           map((favoriteOffers) =>
             FavoriteActions.loadFavoriteOffersSuccess({ favoriteOffers }),
           ),
           catchError((error: HttpErrorResponse) =>
-            of(
-              FavoriteActions.loadFavoriteOffersFailure({
-                error: error.message,
-              }),
-            ),
+            of(FavoriteActions.loadFavoriteOffersFailure({
+              error: error.message,
+            })),
           ),
         ),
       ),
-    ),
-  );
+    ));
 
   public changeStatus$ = createEffect(() =>
     this.actions$.pipe(
       ofType(FavoriteActions.changeFavoriteStatus),
-      switchMap(({ offerId, status }) =>
+      switchMap(({offerId, status}) =>
         this.favoriteOfferService.changeFavoriteStatus(offerId, status).pipe(
           map((offer) =>
-            FavoriteActions.changeFavoriteStatusSuccess({ offer }),
+            FavoriteActions.changeFavoriteStatusSuccess({offer}),
           ),
           catchError((error: HttpErrorResponse) =>
             of(

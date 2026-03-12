@@ -40,6 +40,8 @@ export class OfferCardComponent implements OnInit {
   }
 
   public toggleStatus() {
-    this.store.dispatch(changeFavoriteStatus({offerId: this.offer.id, status: +!this.offer.isFavorite}));
+    if(this.authStatus() === AuthorizationStatus.AUTH) {
+      this.store.dispatch(changeFavoriteStatus({offerId: this.offer.id, status: +!this.offer.isFavorite}));
+    }
   }
 }
