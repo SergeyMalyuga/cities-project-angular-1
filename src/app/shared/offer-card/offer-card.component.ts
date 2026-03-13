@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { OfferPreview } from '../../core/models/offers';
 import { CapitalizePipe } from '../pipes/capitilize.pipe';
-import { RouterLink } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { AppRoute, AuthorizationStatus } from '../../core/constants/const';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../core/models/app.state';
@@ -32,6 +32,7 @@ export class OfferCardComponent implements OnInit {
 
   private store = inject(Store<AppState>);
   private destroyRef = inject(DestroyRef);
+  private router = inject(Router);
 
   public authStatus = signal<AuthorizationStatus>(AuthorizationStatus.UNKNOWN);
   public readonly AuthorizationStatus = AuthorizationStatus;
@@ -59,6 +60,6 @@ export class OfferCardComponent implements OnInit {
           status: +!this.offer.isFavorite,
         }),
       );
-    }
+    } else this.router.navigate([AppRoute.LOGIN])
   }
 }
