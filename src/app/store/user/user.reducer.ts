@@ -15,7 +15,7 @@ import {
 
 const initialState: UserState = {
   user: DEFAULT_USER,
-  authorizationStatus: AuthorizationStatus.UN_AUTH,
+  authorizationStatus: AuthorizationStatus.UNKNOWN,
   isLoading: false,
   error: null,
 };
