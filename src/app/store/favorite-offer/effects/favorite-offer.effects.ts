@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { FavoriteOfferService } from '../../../core/services/favorite-offer.service';
+import { FavoriteOfferApiService } from '../../../core/services/favorite-offer-api.service';
 import * as FavoriteActions from '../actions/favorite-offer.actions';
 import {
   catchError,
@@ -22,7 +22,7 @@ import { AuthorizationStatus } from '../../../core/constants/const';
 })
 export class FavoriteOfferEffects {
   private actions$ = inject(Actions);
-  private favoriteOfferService = inject(FavoriteOfferService);
+  private favoriteOfferService = inject(FavoriteOfferApiService);
   private store = inject(Store<AppState>);
 
   public loadFavoriteOffers$ = createEffect(() =>

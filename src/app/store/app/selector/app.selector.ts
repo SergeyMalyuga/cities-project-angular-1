@@ -57,3 +57,9 @@ export const selectFavoriteOffersCount = createSelector(
   selectFavoriteOffersState,
   favoriteOffersSelectors.selectTotal,
 );
+
+export const selectIsOfferFavorite = (id: string) =>
+  createSelector(selectFavoriteOffersState, (state) =>
+    state.entities[id] ? true : false,
+  );
+

@@ -13,7 +13,7 @@ import { handleError } from '../../utils/error-handler';
 @Injectable({
   providedIn: 'root',
 })
-export class FavoriteOfferService {
+export class FavoriteOfferApiService {
   private http = inject(HttpClient);
 
   public getFavoriteOffers(): Observable<OfferPreview[]> {
