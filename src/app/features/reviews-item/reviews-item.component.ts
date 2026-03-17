@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Comment } from '../../core/models/comments';
-import { DatePipe } from '@angular/common';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {Comment} from '../../core/models/comments';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-reviews-item',

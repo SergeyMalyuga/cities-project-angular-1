@@ -2,10 +2,9 @@ import {ChangeDetectionStrategy, Component, computed, DestroyRef, inject, OnInit
 import {HeaderComponent} from '../../shared/components/header/header.component';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../core/models/app.state';
-import {OfferPreview} from '../../core/models/offers';
 import {selectFavoriteOffers} from '../../store/app/selector/app.selector';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {AppRoute, CITY_LOCATIONS} from '../../core/constants/const';
+import {AppRoute} from '../../core/constants/const';
 import {SortedFavoriteOffers} from '../../core/models/sorted-favorite-offers';
 import {OfferCardComponent} from '../../shared/offer-card/offer-card.component';
 import {CapitalizePipe} from '../../shared/pipes/capitilize.pipe';

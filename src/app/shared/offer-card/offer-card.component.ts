@@ -1,4 +1,14 @@
-import {ChangeDetectionStrategy, Component, DestroyRef, inject, Input, OnInit, signal,} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+  signal,
+} from '@angular/core';
 import {OfferPreview} from '../../core/models/offers';
 import {CapitalizePipe} from '../pipes/capitilize.pipe';
 import {RouterLink} from '@angular/router';
@@ -9,16 +19,18 @@ import {selectAuthStatus, selectIsFavoriteOfferLoading,} from '../../store/app/s
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {ToggleDirective} from '../directives/toggle.directive';
 import {FavoriteOfferService} from '../../core/services/favorite-offer-service';
+import {HoverTrackerDirective} from '../pipes/hover-tracker.directive';
 
 @Component({
   selector: 'app-offer-card',
-  imports: [CapitalizePipe, RouterLink, ToggleDirective],
+  imports: [CapitalizePipe, RouterLink, ToggleDirective, HoverTrackerDirective],
   templateUrl: './offer-card.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OfferCardComponent implements OnInit {
   @Input({required: true}) offer!: OfferPreview;
   @Input() isFavorite = false;
+  @Output() hovered = new EventEmitter<OfferPreview | null>();
 
   private store = inject(Store<AppState>);
   private destroyRef = inject(DestroyRef);
@@ -44,5 +56,13 @@ export class OfferCardComponent implements OnInit {
 
   public changeFavoriteStatus() {
     this.favoriteOfferService.toggleFavoriteStatus(this.offer.id, this.offer.isFavorite);
+  }
+
+  public onHovered(isActive: boolean): void {
+    if (isActive) {
+      this.hovered.emit(this.offer);
+    } else {
+      this.hovered.emit(null);
+    }
   }
 }

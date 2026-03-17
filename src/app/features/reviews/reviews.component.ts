@@ -9,15 +9,15 @@ import {
   Output,
   signal,
 } from '@angular/core';
-import { ReviewsListComponent } from '../reviews-list/reviews-list.component';
-import { Comment } from '../../core/models/comments';
-import { ReviewsFormComponent } from '../reviews-form/reviews-form.component';
-import { NewComment } from '../../core/models/new-comment';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../core/models/app.state';
-import { AuthorizationStatus } from '../../core/constants/const';
-import { selectAuthStatus } from '../../store/app/selector/app.selector';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {ReviewsListComponent} from '../reviews-list/reviews-list.component';
+import {Comment} from '../../core/models/comments';
+import {ReviewsFormComponent} from '../reviews-form/reviews-form.component';
+import {NewComment} from '../../core/models/new-comment';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../core/models/app.state';
+import {AuthorizationStatus} from '../../core/constants/const';
+import {selectAuthStatus} from '../../store/app/selector/app.selector';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-reviews',

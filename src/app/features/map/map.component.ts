@@ -20,6 +20,7 @@ import {City} from '../../core/models/city';
 })
 export class MapComponent implements OnInit, AfterViewInit, OnChanges {
   @Input({required: true}) currentCity!: City;
+  @Input({required: true}) activeCard!: OfferPreview | null;
   @Input({required: true}) offers!: OfferPreview[];
 
   private map!: L.Map;
@@ -56,6 +57,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
       13,
         {animate: true}
       )
+    } else if (changes['activeCard']) {
+      this.markers.forEach(marker => this.map.removeLayer(marker));
+      this.addMarkers();
     }
   }
 
@@ -82,8 +86,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
 
   private addMarkers(): void {
     this.offers.forEach(offer => {
-      const marker = new L.Marker([offer.location.latitude, offer.location.longitude])
-        .setIcon(this.defaultCustomIcon).addTo(this.map);
+      const marker = new L.Marker([offer.location.latitude, offer.location.longitude]).bindTooltip(offer.title, { permanent: false,
+        direction: 'top',
+        offset: [0, -20]})
+        .setIcon(this.activeCard && offer.id === this.activeCard.id ? this.currentCustomIcon : this.defaultCustomIcon).addTo(this.map);
       this.markers.push(marker);
     })
   }

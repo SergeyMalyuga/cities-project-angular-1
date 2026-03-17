@@ -1,17 +1,13 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../../core/models/app.state';
-import {
-  selectAuthStatus,
-  selectFavoriteOffersCount,
-  selectUserEmail,
-} from '../../../store/app/selector/app.selector';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { AppRoute, AuthorizationStatus } from '../../../core/constants/const';
-import { RouterLink } from '@angular/router';
-import { SignOutDirective } from './directives/sign-out.directive';
-import { logout } from '../../../store/user/actions/user.actions';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {NgOptimizedImage} from '@angular/common';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../../core/models/app.state';
+import {selectAuthStatus, selectFavoriteOffersCount, selectUserEmail,} from '../../../store/app/selector/app.selector';
+import {toSignal} from '@angular/core/rxjs-interop';
+import {AppRoute, AuthorizationStatus} from '../../../core/constants/const';
+import {RouterLink} from '@angular/router';
+import {SignOutDirective} from './directives/sign-out.directive';
+import {logout} from '../../../store/user/actions/user.actions';
 
 @Component({
   selector: 'app-header',

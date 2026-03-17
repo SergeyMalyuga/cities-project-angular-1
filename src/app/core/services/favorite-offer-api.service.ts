@@ -1,14 +1,9 @@
-import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, retry, timeout } from 'rxjs';
-import { Offer, OfferPreview } from '../models/offers';
-import {
-  APIRoute,
-  BASE_URL,
-  RETRY_ATTEMPTS,
-  TIMEOUT_MS,
-} from '../constants/const';
-import { handleError } from '../../utils/error-handler';
+import {inject, Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {catchError, Observable, retry, timeout} from 'rxjs';
+import {Offer, OfferPreview} from '../models/offers';
+import {APIRoute, BASE_URL, RETRY_ATTEMPTS, TIMEOUT_MS,} from '../constants/const';
+import {handleError} from '../../utils/error-handler';
 
 @Injectable({
   providedIn: 'root',

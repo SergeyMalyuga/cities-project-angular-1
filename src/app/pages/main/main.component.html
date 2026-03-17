@@ -23,13 +23,13 @@
           />
           <div class="cities__places-list places__list tabs__content">
             @for (offer of offers() | sortBy: sortType(); track offer.id) {
-              <app-offer-card [offer]="offer" />
+              <app-offer-card [offer]="offer" (hovered)="changeActiveCard($event)" />
             }
           </div>
         </section>
         <div class="cities__right-section">
-          <section id="map" class="cities__map map">
-            <app-map [offers]="offers()" [currentCity]="currentCity()"></app-map>
+          <section class="cities__map map">
+            <app-map [offers]="offers()" [currentCity]="currentCity()" [activeCard]="activeCard()"></app-map>
           </section>
         </div>
       </div>

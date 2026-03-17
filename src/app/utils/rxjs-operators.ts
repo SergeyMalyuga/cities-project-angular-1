@@ -1,6 +1,6 @@
-import { catchError, MonoTypeOperatorFunction, retry, timeout } from 'rxjs';
-import { RETRY_ATTEMPTS, TIMEOUT_MS } from '../core/constants/const';
-import { handleError } from './error-handler';
+import {catchError, MonoTypeOperatorFunction, retry, timeout} from 'rxjs';
+import {RETRY_ATTEMPTS, TIMEOUT_MS} from '../core/constants/const';
+import {handleError} from './error-handler';
 
 export function defaultHttpPipe<T>(): [
   MonoTypeOperatorFunction<T>,

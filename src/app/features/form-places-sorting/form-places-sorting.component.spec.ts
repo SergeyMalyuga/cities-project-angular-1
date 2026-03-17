@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FormPlacesSortingComponent } from './form-places-sorting.component';
+import {FormPlacesSortingComponent} from './form-places-sorting.component';
 
 describe('FormPlacesSortingComponent', () => {
   let component: FormPlacesSortingComponent;

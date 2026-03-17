@@ -1,34 +1,19 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  inject,
-  OnInit,
-} from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import {
-  AppRoute,
-  AuthorizationStatus,
-  CITY_LOCATIONS,
-} from '../../core/constants/const';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../core/models/app.state';
-import { login } from '../../store/user/actions/user.actions';
-import { Credentials } from '../../core/models/credentials';
-import { selectAuthStatus } from '../../store/app/selector/app.selector';
-import { filter, take } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { SelectCityDirective } from '../../shared/directives/select-city.directive';
-import { City } from '../../core/models/city';
-import { changeCity } from '../../store/city/actions/city.actions';
-import { loadFavoriteOffers } from '../../store/favorite-offer/actions/favorite-offer.actions';
-import { loadOffers } from '../../store/offer/actions/offer.actions';
+import {ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit,} from '@angular/core';
+import {Router, RouterLink} from '@angular/router';
+import {AppRoute, AuthorizationStatus, CITY_LOCATIONS,} from '../../core/constants/const';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators,} from '@angular/forms';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../core/models/app.state';
+import {login} from '../../store/user/actions/user.actions';
+import {Credentials} from '../../core/models/credentials';
+import {selectAuthStatus} from '../../store/app/selector/app.selector';
+import {filter, take} from 'rxjs';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {SelectCityDirective} from '../../shared/directives/select-city.directive';
+import {City} from '../../core/models/city';
+import {changeCity} from '../../store/city/actions/city.actions';
+import {loadFavoriteOffers} from '../../store/favorite-offer/actions/favorite-offer.actions';
+import {loadOffers} from '../../store/offer/actions/offer.actions';
 
 @Component({
   selector: 'app-login-page',

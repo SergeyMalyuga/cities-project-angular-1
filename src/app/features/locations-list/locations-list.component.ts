@@ -1,13 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
-import { CITY_LOCATIONS, CityName } from '../../core/constants/const';
-import { LocationsItemComponent } from '../locations-item/locations-item.component';
-import { City } from '../../core/models/city';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output,} from '@angular/core';
+import {CITY_LOCATIONS, CityName} from '../../core/constants/const';
+import {LocationsItemComponent} from '../locations-item/locations-item.component';
+import {City} from '../../core/models/city';
 
 @Component({
   selector: 'app-locations-list',

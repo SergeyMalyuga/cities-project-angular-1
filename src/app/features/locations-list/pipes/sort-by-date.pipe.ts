@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { Comment } from '../../../core/models/comments';
+import {Pipe, PipeTransform} from '@angular/core';
+import {Comment} from '../../../core/models/comments';
 
 @Pipe({
   name: 'sortByDate',
