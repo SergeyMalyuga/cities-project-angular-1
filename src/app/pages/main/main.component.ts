@@ -23,6 +23,7 @@ import { DEFAULT_CITY, SortType } from '../../core/constants/const';
 import { changeCity } from '../../store/city/actions/city.actions';
 import { FormPlacesSortingComponent } from '../../features/form-places-sorting/form-places-sorting.component';
 import { SortByPipe } from './pipes/sort-by.pipe';
+import {MapComponent} from '../../features/map/map.component';
 
 @Component({
   selector: 'app-main-page',
@@ -32,6 +33,7 @@ import { SortByPipe } from './pipes/sort-by.pipe';
     LocationsListComponent,
     FormPlacesSortingComponent,
     SortByPipe,
+    MapComponent,
   ],
   templateUrl: './main.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

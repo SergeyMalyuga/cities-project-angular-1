@@ -614,18 +614,11 @@ img {
   width: 100%;
   -ms-flex-item-align: stretch;
   align-self: stretch;
-  background-image: url(../img/map.jpg);
-  background-size: 682px auto;
-  background-repeat: no-repeat;
-  background-position: -170px center;
+
 }
 @media (-webkit-min-device-pixel-ratio: 1.5),
   (min-resolution: 144dpi),
   (min-resolution: 1.5dppx) {
-  .cities__map {
-    background-image: url(../img/map@2x.jpg);
-    background-size: 682px 794px;
-  }
 }
 @media (min-height: 980px) {
   .cities__map {

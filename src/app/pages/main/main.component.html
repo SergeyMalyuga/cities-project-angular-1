@@ -28,7 +28,9 @@
           </div>
         </section>
         <div class="cities__right-section">
-          <section class="cities__map map"></section>
+          <section id="map" class="cities__map map">
+            <app-map [offers]="offers()" [currentCity]="currentCity()"></app-map>
+          </section>
         </div>
       </div>
     </div>
