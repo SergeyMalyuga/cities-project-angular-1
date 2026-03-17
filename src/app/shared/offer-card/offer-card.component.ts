@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, DestroyRef, inject, Input, OnInit, signal,} from '@angular/core';
 import {OfferPreview} from '../../core/models/offers';
 import {CapitalizePipe} from '../pipes/capitilize.pipe';
-import {Router, RouterLink} from '@angular/router';
+import {RouterLink} from '@angular/router';
 import {AppRoute, AuthorizationStatus} from '../../core/constants/const';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../core/models/app.state';
@@ -18,6 +18,7 @@ import {FavoriteOfferService} from '../../core/services/favorite-offer-service';
 })
 export class OfferCardComponent implements OnInit {
   @Input({required: true}) offer!: OfferPreview;
+  @Input() isFavorite = false;
 
   private store = inject(Store<AppState>);
   private destroyRef = inject(DestroyRef);

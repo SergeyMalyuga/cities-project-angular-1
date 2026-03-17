@@ -1,5 +1,5 @@
 <div class="page" [class.page--favorites-empty]="totalFavoriteOffers() === 0">
-  <app-header />
+  <app-header/>
   <main class="page__main page__main--favorites" [class.page__main--favorites-empty]="totalFavoriteOffers() === 0">
     <div class="page__favorites-container container">
       @if (totalFavoriteOffers() === 0) {
@@ -22,13 +22,13 @@
                   <div class="favorites__locations locations locations--current">
                     <div class="locations__item">
                       <a class="locations__item-link" href="#">
-                        <span>{{city | capitalize}}</span>
+                        <span>{{ city | capitalize }}</span>
                       </a>
                     </div>
                   </div>
                   <div class="favorites__places">
                     @for (offer of sortedFavoriteOffers()[city]; track offer.id) {
-                      <app-offer-card [offer]="offer"/>
+                      <app-offer-card class="favorites__card" [offer]="offer" [isFavorite]="true"/>
                     }
                   </div>
                 </li>
@@ -36,7 +36,6 @@
             }
           </ul>
         </section>
-
       }
     </div>
   </main>
