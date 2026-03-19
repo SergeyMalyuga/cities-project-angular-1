@@ -3,7 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnChanges,
+  OnChanges, OnDestroy,
   OnInit,
   SimpleChanges
 } from '@angular/core';
@@ -18,7 +18,7 @@ import {City} from '../../core/models/city';
   styleUrl: './map.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MapComponent implements OnInit, AfterViewInit, OnChanges {
+export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   @Input({required: true}) currentCity!: City;
   @Input({required: true}) activeCard!: OfferPreview | null;
   @Input({required: true}) offers!: OfferPreview[];
@@ -60,6 +60,12 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
     } else if (changes['activeCard']) {
       this.markers.forEach(marker => this.map.removeLayer(marker));
       this.addMarkers();
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.map) {
+      this.map.remove();
     }
   }
 
